@@ -1,0 +1,492 @@
+/****************************** MAIN BODY ******************************/
+/* Body and General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #1a0026; /* Dark purple base */
+    font-family: 'Cinzel', serif; /* Gothic and elegant font */
+    color: #e0e0e0; /* Soft white for text */
+    scroll-behavior: smooth;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: black;
+    overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
+/* Custom scrollbar styles */
+body::-webkit-scrollbar {
+    width: 4px; /* Thin scrollbar width */
+}
+body::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px; /* Rounded scrollbar thumb */
+}
+body::-webkit-scrollbar-track {
+    background: transparent; /* Transparent track */
+}
+
+/* Hidden class to toggle visibility */
+.hidden {
+    display: none !important;
+}
+
+/****************************** PASSWORD VERIFICATION ******************************/
+.password-verification {
+    position: fixed; /* Ensure it stays in view */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2c2c2c; /* Dark gray background */
+    z-index: 100; /* Ensure it's above all other layers */
+}
+
+.password-verification-container {
+    padding: 20px;
+    border: 3px solid red; /* Red shiny border */
+    border-radius: 15px;
+    box-shadow: 0 0 100px red; /* Glow effect */
+    text-align: center;
+    width: 90%; /* Responsive width */
+    max-width: 300px; /* Max width for larger screens */
+}
+
+.password-verification h1 {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.password-verification-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.password-verification button {
+    padding: 10px 20%;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.password-verification .submit-btn {
+    background-color: #ff004d; /* Red to match theme */
+    box-shadow: 0 0 5px #ff004d;
+}
+
+.password-verification button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/****************************** AGE VERIFICATION ******************************/
+.age-verification {
+    position: fixed; /* Ensure it stays in view */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #2c2c2c; /* Dark gray background */
+    z-index: 90; /* Below password verification but above main content */
+}
+
+.age-verification-container {
+    padding: 20px;
+    border: 3px solid red; /* Red shiny border */
+    border-radius: 15px;
+    box-shadow: 0 0 100px red; /* Glow effect */
+    text-align: center;
+    width: 90%; /* Responsive width */
+    max-width: 300px; /* Max width for larger screens */
+}
+
+.age-verification h1 {
+    color: white;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.age-verification-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.age-verification button {
+    padding: 10px 20%;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.age-verification .yes-btn {
+    background-color: green;
+    box-shadow: 0 0 5px green;
+}
+
+.age-verification .no-btn {
+    background-color: red;
+    box-shadow: 0 0 5px red;
+}
+
+.age-verification button:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/****************************** MAIN PAGE ******************************/
+/* Background container */
+.background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 1; /* Main content above background layers but below verification layers */
+}
+
+/* Cosmic Milky Way Layer */
+.cosmic-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(80, 0, 120, 0.5), rgba(20, 0, 40, 0.2), transparent 70%);
+    opacity: 0.9;
+    animation: cosmic-swirl 20s infinite linear;
+}
+
+/* Spider Web and Satanic Overlay */
+.web-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.3"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="rgba(255, 0, 0, 0.5)"/><path d="M10 10 L90 90 M90 10 L10 90" stroke="rgba(255, 255, 255, 0.2)"/></svg>') repeat;
+    opacity: 0.5;
+}
+
+/* Original Fast Particles */
+.particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.particles::before, .particles::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    animation: move-random 5s infinite ease-in-out;
+}
+
+.particles::after {
+    animation-delay: 2s;
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 0, 0, 0.7);
+}
+
+/* Enhanced Debris Layer */
+.debris {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.debris::before, .debris::after, 
+.debris span::before, .debris span::after,
+.debris div::before, .debris div::after {
+    content: '';
+    position: absolute;
+    background: rgba(200, 0, 200, 0.5); /* Brighter purple debris */
+    border-radius: 50%;
+    animation: move-slow 15s infinite ease-in-out;
+}
+
+.debris::before {
+    width: 6px;
+    height: 6px;
+    animation-delay: 0s;
+    top: 5%;
+}
+
+.debris::after {
+    width: 8px;
+    height: 8px;
+    animation-delay: 3s;
+    bottom: 5%;
+}
+
+.debris span::before {
+    width: 5px;
+    height: 5px;
+    animation-delay: 6s;
+    top: 10%;
+}
+
+.debris span::after {
+    width: 7px;
+    height: 7px;
+    animation-delay: 9s;
+    bottom: 10%;
+}
+
+.debris div::before {
+    width: 4px;
+    height: 4px;
+    animation-delay: 12s;
+    top: 15%;
+}
+
+.debris div::after {
+    width: 6px;
+    height: 6px;
+    animation-delay: 15s;
+    bottom: 15%;
+}
+
+/* Hack to add more debris elements */
+.debris span, .debris div {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/* Top Navigation */
+.top-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 20px;
+}
+
+.top-nav a {
+    color: #ff004d;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
+    transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+    color: #ff66b3;
+}
+
+/* Social Navigation */
+.social-nav {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2;
+    display: flex;
+    gap: 15px;
+}
+
+.social-nav a {
+    color: #ff004d;
+    font-size: 1.5rem;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
+    transition: color 0.3s ease;
+}
+
+.social-nav a:hover {
+    color: #ff66b3;
+}
+
+/* Title and Image Content */
+.content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #ff004d;
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(255, 0, 77, 0.9), 0 0 30px rgba(255, 0, 77, 0.6);
+    margin: 0;
+    padding: 0 20px;
+}
+
+/* Goddess Image */
+.goddess-image {
+    width: 300px;
+    height: 400px;
+    background: url('../images/lyx2.png');
+    background-size: cover;
+    margin-top: 40px;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8), inset 0 0 60px rgba(0, 0, 0, 0.9);
+    border: 3px solid rgba(255, 0, 77, 0.6);
+    border-radius: 15px;
+}
+
+/* Discover Button */
+.discover-btn {
+    margin-top: 40px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    background: linear-gradient(45deg, #ff004d, #ff00ff, #00ffcc);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 0, 77, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.discover-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes cosmic-swirl {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes move-random {
+    0% { transform: translate(0, 0); opacity: 0; }
+    20% { transform: translate(100vw, 50vh); opacity: 1; }
+    40% { transform: translate(20vw, 80vh); }
+    60% { transform: translate(80vw, 20vh); }
+    80% { transform: translate(50vw, 70vh); }
+    100% { transform: translate(0, 0); opacity: 0; }
+}
+
+@keyframes move-slow {
+    0% { transform: translate(30vw, 0); opacity: 0.5; }
+    25% { transform: translate(70vw, 10vh); opacity: 1; }
+    50% { transform: translate(20vw, 20vh); }
+    75% { transform: translate(80vw, 10vh); }
+    100% { transform: translate(30vw, 0); opacity: 0.5; }
+}
+
+/* Original particle alt animation */
+.particles::before {
+    animation: move-random-alt 7s infinite ease-in-out;
+}
+
+@keyframes move-random-alt {
+    0% { transform: translate(50vw, 10vh); opacity: 0; }
+    25% { transform: translate(10vw, 90vh); opacity: 1; }
+    50% { transform: translate(90vw, 30vh); }
+    75% { transform: translate(30vw, 60vh); }
+    100% { transform: translate(50vw, 10vh); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    /* Password Verification */
+    .password-verification-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .password-verification h1 {
+        font-size: 1.5em;
+    }
+
+    .password-verification p {
+        font-size: 0.8em;
+    }
+
+    .password-verification input {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    .password-verification button {
+        padding: 8px 15%;
+        font-size: 1em;
+    }
+
+    /* Age Verification */
+    .age-verification-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .age-verification h1 {
+        font-size: 1.5em;
+    }
+
+    .age-verification p {
+        font-size: 0.8em;
+    }
+
+    .age-verification button {
+        padding: 8px 15%;
+        font-size: 1em;
+    }
+
+    /* Main Content */
+    h1 {
+        font-size: 1.8rem;
+        padding: 0 10px;
+    }
+
+    .goddess-image {
+        width: 250px;
+        height: 350px;
+    }
+
+    .discover-btn {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .top-nav {
+        top: 10px;
+        left: 10px;
+        gap: 10px;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    }
+
+    .top-nav a {
+        font-size: 0.8rem;
+        gap: 5px;
+    }
+
+    .social-nav {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+
+    .social-nav a {
+        font-size: 1.2rem;
+    }
+}

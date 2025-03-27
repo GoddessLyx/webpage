@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goddess Lyx</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="icon" type="image/png" href="images/lyx.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <!-- Password Verification Section -->
+    <div id="password-verification" class="password-verification">
+        <div class="password-verification-container">
+            <h1>Enter Password</h1>
+            <p style="color: lightgray; font-size: 0.9em; margin-bottom: 20px;">
+                Please enter the password to access this site. This is a private page for authorized users only.
+            </p>
+            <input type="password" id="password-input" placeholder="Enter password" style="padding: 10px; width: 90%; font-size: 1em; border-radius: 5px; border: 1px solid red; background: #1a0026; color: white;">
+            <div class="password-verification-buttons">
+                <button id="password-submit" class="submit-btn">Submit</button>
+            </div>
+            <p id="password-error" class="error-message" style="display: none; color: red; margin-top: 10px;">Incorrect password. Please try again.</p>
+        </div>
+    </div>
+
+    <!-- Age Verification Section -->
+    <div id="age-verification" class="age-verification hidden">
+        <div class="age-verification-container">
+            <h1>¿Tienes 18 años o más?</h1>
+            <p style="color: lightgray; font-size: 0.9em; margin-bottom: 20px;">
+                Al hacer clic en "Sí", confirmas que cumples con el requisito de edad mínima establecido por las regulaciones de la Unión Europea para acceder a contenido restringido por edad. 
+                Este sitio cumple con las directrices del RGPD (Reglamento General de Protección de Datos) para garantizar tu privacidad y seguridad. 
+                Si no tienes la edad legal, debes abandonar el sitio.
+            </p>
+            <div class="age-verification-buttons">
+                <button id="age-yes" class="yes-btn">Sí</button>
+                <button id="age-no" class="no-btn">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="background hidden">
+        <div class="cosmic-layer"></div>
+        <div class="web-layer"></div>
+        <div class="particles"></div>
+        <div class="debris"></div>
+        <!-- Top Navigation -->
+        <nav class="top-nav">
+            <a href="#gallery"><i class="fas fa-images"></i> Gallery</a>
+            <a href="#laws"><i class="fas fa-gavel"></i> Laws</a>
+            <a href="#book"><i class="fas fa-calendar-alt"></i> Book a Session</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+        </nav>
+        <!-- Main Content -->
+        <div class="content">
+            <h1>Bow Down Before the Goddess Lyx</h1>
+            <div class="goddess-image"></div>
+            <button class="discover-btn">Discover</button>
+        </div>
+        <!-- Bottom Social Icons -->
+        <div class="social-nav">
+            <a href="#instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#onlyfans"><i class="fas fa-heart"></i></a>
+            <a href="#telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#x"><i class="fab fa-x-twitter"></i></a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/ageVerification.js"></script>
+</body>
+</html>
