@@ -2,9 +2,9 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background: #1a0026;
     font-family: 'Cinzel', serif;
-    color: #e0e0e0;
+    background: linear-gradient(120deg, #0e0e0e 30%, #f5ebdc 70%);
+    color: #f5ebdc;
     scroll-behavior: smooth;
     position: relative;
     scrollbar-width: thin;
@@ -23,14 +23,6 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
     background: transparent;
-}
-
-.background {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    z-index: 1;
-    background: url('../images/twitter-header-bg.jpg') center/cover no-repeat;
 }
 
 .cosmic-layer, .web-layer, .particles, .debris {

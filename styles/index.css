@@ -2,10 +2,14 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100vh;
-    background: #000;
+    height: 100%;
+    background: linear-gradient(120deg, #0e0e0e 30%, #f5ebdc 70%);
+    color: #f5ebdc;
     font-family: 'Cinzel', serif;
-    color: #e0e0e0;
+    scroll-behavior: smooth;
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #a09497 transparent;
     overflow-x: hidden;
 }
 
