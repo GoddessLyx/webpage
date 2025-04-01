@@ -9,7 +9,7 @@ body, html {
     scroll-behavior: smooth;
     position: relative;
     scrollbar-width: thin;
-    scrollbar-color: black;
+    scrollbar-color: #ff004d transparent;
     overflow-x: hidden;
 }
 
@@ -18,7 +18,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: #ff004d;
     border-radius: 10px;
 }
 
@@ -32,15 +32,18 @@ body::-webkit-scrollbar-track {
     width: 100%;
     min-height: 100vh;
     z-index: 1;
-    background: #1a0026;
+    background: linear-gradient(45deg, #1a0026 30%, rgba(245, 235, 220, 0.7) 70%); /* Milky and black gradient */
+    overflow-x: hidden;
 }
 
 .cream-layer {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(245, 235, 220, 0.8), rgba(245, 235, 220, 0.3), transparent 70%);
+    background: radial-gradient(circle at 20% 30%, rgba(245, 235, 220, 0.7) 0%, transparent 50%), /* Tint effect 1 */
+                radial-gradient(circle at 80% 70%, rgba(245, 235, 220, 0.7) 0%, transparent 50%); /* Tint effect 2 */
     opacity: 0.9;
+    z-index: 0;
 }
 
 .flowing-lines {
@@ -50,6 +53,7 @@ body::-webkit-scrollbar-track {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M0 100 Q 200 50, 400 100 T 800 100 T 1200 100 T 1600 100" fill="none" stroke="rgba(255, 255, 255, 0.2)" stroke-width="2"/></svg>') repeat-x;
     opacity: 0.5;
     animation: flow 20s infinite linear;
+    z-index: 1;
 }
 
 /****************************** FLOATING SHOES ******************************/
@@ -64,18 +68,47 @@ body::-webkit-scrollbar-track {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: url('../icons/heel.png') no-repeat center;
     background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     animation: float 15s infinite ease-in-out;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 77, 0.5));
 }
 
-.shoe-1 { top: 10%; left: 20%; animation-delay: 0s; }
-.shoe-2 { top: 50%; left: 60%; animation-delay: 5s; }
-.shoe-3 { top: 80%; left: 30%; animation-delay: 10s; }
+.shoe-1 { 
+    background: url('../icons/h1.png') center; 
+    top: 10%; 
+    left: 10%; 
+    animation-delay: 0s; 
+}
+.shoe-2 { 
+    background: url('../icons/h2.png') center; 
+    top: 40%; 
+    left: 70%; 
+    animation-delay: 5s; 
+}
+.shoe-3 { 
+    background: url('../icons/h3.png') center; 
+    top: 70%; 
+    left: 20%; 
+    animation-delay: 10s; 
+}
+.shoe-4 { 
+    background: url('../icons/h4.png') center; 
+    top: 20%; 
+    left: 80%; 
+    animation-delay: 2s; 
+}
+.shoe-5 { 
+    background: url('../icons/h5.png') center; 
+    top: 60%; 
+    left: 5%; 
+    animation-delay: 7s; 
+}
 
 /****************************** TOP NAVIGATION ******************************/
 .top-nav {
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 20px;
     z-index: 3;
@@ -101,7 +134,7 @@ body::-webkit-scrollbar-track {
 
 /****************************** SOCIAL NAVIGATION ******************************/
 .social-nav {
-    position: absolute;
+    position: fixed;
     bottom: 20px;
     right: 20px;
     z-index: 3;
@@ -114,11 +147,12 @@ body::-webkit-scrollbar-track {
     font-size: 1.5rem;
     text-decoration: none;
     text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .social-nav a:hover {
     color: #ff66b3;
+    transform: scale(1.2);
 }
 
 /****************************** GALLERY CONTENT ******************************/
@@ -189,37 +223,54 @@ h1 {
     transform: scale(1.1);
 }
 
-/* Mobile Random Movement View */
+/****************************** MOBILE GALLERY VIEW ******************************/
 .mobile-view {
-    display: none;
+    display: none; /* Hidden by default, shown on mobile */
 }
 
 .gallery-random {
     position: relative;
     width: 100%;
-    height: 50vh; /* Adjust height to fit the viewport */
-    max-width: 100%;
-    margin: 0 auto;
-    overflow: hidden;
+    height: 100vh; /* Full viewport height for mobile */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal overflow */
+    scroll-snap-type: y mandatory; /* Snap to each image */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
 }
 
 .random-item {
-    position: absolute;
-    width: 80vw; /* 80% of the viewport width */
-    height: auto; /* Height will be determined by aspect ratio */
+    position: relative;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: center; /* Center each item when scrolling */
     opacity: 0;
-    transform: scale(0.3);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: scale(0.9);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.random-item.active {
+    opacity: 1;
+    transform: scale(1);
 }
 
 .random-item img {
-    width: 100%;
+    width: 90vw; /* 90% of viewport width to leave a slight margin */
     height: auto; /* Maintain aspect ratio */
+    max-height: 80vh; /* Limit height to fit screen */
     object-fit: cover;
     border: 3px solid #ff004d;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(255, 0, 77, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(255, 0, 77, 0.7), 0 10px 30px rgba(0, 0, 0, 0.5);
     filter: brightness(1.1);
+    transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.random-item img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.2);
 }
 
 .random-item::after {
@@ -228,14 +279,26 @@ h1 {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 30%;
-    background: linear-gradient(to top, rgba(255, 0, 77, 0.2), transparent);
+    height: 40%;
+    background: linear-gradient(to top, rgba(255, 0, 77, 0.3), transparent);
     pointer-events: none;
 }
 
-.random-item.active {
-    opacity: 1;
-    transform: scale(1);
+/****************************** SCROLL INDICATOR ******************************/
+.scroll-indicator {
+    display: none; /* Hidden by default, shown on mobile */
+    position: fixed;
+    bottom: 60px; /* Above social nav */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    animation: bounce 2s infinite;
+}
+
+.scroll-indicator i {
+    font-size: 2rem;
+    color: #ff004d;
+    text-shadow: 0 0 10px rgba(255, 0, 77, 0.5);
 }
 
 /****************************** ANIMATIONS ******************************/
@@ -245,19 +308,19 @@ h1 {
 }
 
 @keyframes float {
-    0% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
-    25% { transform: translate(20vw, 10vh) rotate(90deg); opacity: 1; }
-    50% { transform: translate(40vw, 20vh) rotate(180deg); }
-    75% { transform: translate(60vw, 10vh) rotate(270deg); opacity: 1; }
-    100% { transform: translate(80vw, 0) rotate(360deg); opacity: 0.5; }
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
 }
 
 /****************************** RESPONSIVE DESIGN ******************************/
 @media (max-width: 768px) {
-    h1 {
-        font-size: 1.8rem;
-    }
-
     .desktop-view {
         display: none;
     }
@@ -267,37 +330,15 @@ h1 {
     }
 
     .gallery-random {
-        height: 50vh; /* Adjust height for mobile */
+        height: 100vh;
     }
 
     .random-item {
-        width: 80vw; /* 80% of the viewport width */
+        width: 100vw;
+        height: 100vh;
     }
 
-    .top-nav {
-        top: 10px;
-        left: 10px;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .top-nav a {
-        font-size: 0.8rem;
-        gap: 5px;
-    }
-
-    .social-nav {
-        bottom: 10px;
-        right: 10px;
-        gap: 10px;
-    }
-
-    .social-nav a {
-        font-size: 1.2rem;
-    }
-
-    .shoe {
-        width: 40px;
-        height: 40px;
+    .scroll-indicator {
+        display: block; /* Show on mobile */
     }
 }
