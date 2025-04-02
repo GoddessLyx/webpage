@@ -1,18 +1,4 @@
 /****************************** MAIN BODY ******************************/
-body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: linear-gradient(120deg, #0e0e0e 30%, #f5ebdc 70%);
-    color: #f5ebdc;
-    font-family: 'Cinzel', serif;
-    scroll-behavior: smooth;
-    position: relative;
-    scrollbar-width: thin;
-    scrollbar-color: #a09497 transparent;
-    overflow-x: hidden;
-}
-
 body::-webkit-scrollbar {
     width: 1px;
 }
@@ -24,99 +10,6 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-track {
     background: transparent;
-}
-
-/*==================== BACKGROUND LAYERS ====================*/
-.background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-  
-.cream-layer {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at 30% 40%, rgba(245, 235, 220, 0.2) 0%, transparent 70%),
-                radial-gradient(circle at 70% 60%, rgba(245, 235, 220, 0.2) 0%, transparent 70%);
-    z-index: 0;
-}
-  
-.flowing-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M0 100 Q 200 50, 400 100 T 800 100 T 1200 100 T 1600 100" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2"/></svg>') repeat-x;
-    opacity: 0.2;
-    animation: flow 20s linear infinite;
-    z-index: 1;
-}
-
-.cosmic-layer, .web-layer, .particles, .debris {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.web-layer {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.3"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="rgba(194, 137, 16, 0.5)"/><path d="M10 10 L90 90 M90 10 L10 90" stroke="rgba(255, 255, 255, 0.2)"/></svg>') repeat;
-    opacity: 0.5;
-}
-
-.top-nav {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 2;
-    display: flex;
-    gap: 20px;
-}
-
-.top-nav a {
-    color: #ff004d;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
-}
-
-.top-nav a:hover {
-    color: #ff66b3;
-}
-
-.social-nav {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 2;
-    display: flex;
-    gap: 15px;
-}
-
-.social-nav a {
-    color: #ff004d;
-    font-size: 1.5rem;
-    text-decoration: none;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
-}
-
-.social-nav a:hover {
-    color: #ff66b3;
-}
-
-.contact-content {
-    position: relative;
-    z-index: 1;
-    padding: 80px 20px;
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
 }
 
 /****************************** GALLERY CONTENT ******************************/

@@ -181,10 +181,10 @@ body, html {
 
 .shoe, .kiss {
     position: absolute;
-    width: 30px; /* Reduced size for better fit */
+    width: 30px;
     height: 40px;
-    background-size: contain; /* Use contain to show the entire image */
-    background-position: center; /* Center the image */
+    background-size: contain; /* to show the entire image */
+    background-position: center;
     background-repeat: no-repeat;
     animation: pulse 5s infinite ease-in-out;
     filter: drop-shadow(0 0 10px rgba(255, 0, 77, 0.5));
@@ -242,68 +242,11 @@ body, html {
     animation-delay: 5s; 
 }
 
-/****************************** ANIMATIONS ******************************/
+/* Animate them */
 @keyframes pulse {
     0% { transform: scale(1); opacity: 0.7; }
     50% { transform: scale(1.3); opacity: 1; }
     100% { transform: scale(1); opacity: 0.7; }
-}
-
-/****************************** RESPONSIVE DESIGN ******************************/
-@media (max-width: 768px) {
-    .shoe, .kiss {
-        width: 30px; /* Further reduced size on mobile */
-        height: 30px;
-    }
-}
-
-/****************************** TOP NAVIGATION ******************************/
-.top-nav {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 3;
-    display: flex;
-    gap: 20px;
-}
-
-.top-nav a {
-    color: #ff004d;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
-}
-
-.top-nav a:hover {
-    color: #ff66b3;
-}
-
-/****************************** SOCIAL NAVIGATION ******************************/
-.social-nav {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 3;
-    display: flex;
-    gap: 15px;
-}
-
-.social-nav a {
-    color: #ff004d;
-    font-size: 1.5rem;
-    text-decoration: none;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease, transform 0.3s ease;
-}
-
-.social-nav a:hover {
-    color: #ff66b3;
-    transform: scale(1.2);
 }
 
 /****************************** CONTENT ******************************/
@@ -376,22 +319,5 @@ h1 {
     .text-container {
         padding: 15px;
         max-width: 90%;
-    }
-
-    .top-nav {
-        top: 10px;
-        left: 10px;
-        gap: 10px;
-    }
-
-    .social-nav {
-        bottom: 10px;
-        right: 10px;
-        gap: 10px;
-    }
-
-    .shoe, .kiss {
-        width: 40px;
-        height: 40px;
     }
 }
