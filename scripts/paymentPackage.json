@@ -1,0 +1,7 @@
+{
+    "name": "lyx-payments",
+    "version": "1.0.0",
+    "main": "paymentServer.js",
+    "scripts": { "start": "node paymentServer.js" },
+    "dependencies": { "express": "^4.18.2", "stripe": "^14.0.0" }
+}

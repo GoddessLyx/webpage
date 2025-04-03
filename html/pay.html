@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Goddess Lyx</title>
+    <link rel="stylesheet" href="../styles/gallery.css">
+    <link rel="icon" type="image/png" href="../images/lyx.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {text-align: center;}
+    select, button { padding: 10px; margin: 10px; font-size: 16px; }
+    #card-element { width: 300px; margin: 20px auto; padding: 10px; border: 1px solid #ccc; }
+</style>
+<body>
+    <div class="background">
+        <h1>Send a Gift to Goddess Lyx</h1>
+        <form id="payment-form">
+            <label for="amount">Choose Gift Amount:</label>
+            <select id="amount" name="amount">
+                <option value="1000">€10</option>
+                <option value="2500">€25</option>
+                <option value="5000">€50</option>
+                <option value="10000">€100</option>
+            </select>
+            <div id="card-element"></div>
+            <button type="submit">Send Gift</button>
+            <div id="error-message" style="color: red;"></div>
+        </form>
+    </div>
+    <!-- Load Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>
