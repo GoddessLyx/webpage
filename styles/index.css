@@ -208,7 +208,7 @@ h1 {
 }
 
 .intro-content {
-    background: rgba(0, 0, 0, 0.9); /* Darker, more opaque background */
+    background: rgba(179, 153, 3, 0.178); /* Darker, more opaque background */
     border: 2px solid var(--accent-red);
     border-radius: 0; /* Remove rounded corners for a sharper look */
     padding: 20px;
@@ -240,13 +240,13 @@ h1 {
 
 .intro-text {
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    color: #fff;
+    font-size: 1.5rem;
+    color: #130233;
     margin: 0;
     padding: 0 20px;
     text-shadow: 0 0 10px var(--accent-red), 0 0 20px var(--accent-red);
     letter-spacing: 1px;
-    line-height: 1.5;
+    line-height: 2;
     animation: text-glow 2s infinite ease-in-out;
 }
 
@@ -358,7 +358,7 @@ h1 {
     }
 
     .intro-text {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     .intro-content {
