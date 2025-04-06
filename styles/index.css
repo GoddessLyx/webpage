@@ -403,6 +403,11 @@ h1 {
         width: 140px;
         height: 140px;
     }
+    .shoe-3 { 
+        top: 60%; 
+        left: 60%; 
+        animation-delay: 4s; 
+    }
 
     .kiss {
         width: 25px;
