@@ -4,63 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery - Goddess Lyx</title>
-    <link rel="stylesheet" href="../styles/common.css">
     <link rel="stylesheet" href="../styles/gallery.css">
     <link rel="icon" type="image/png" href="../images/lyx.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="background">
-        <div class="cream-layer"></div>
-        <div class="flowing-lines"></div>
-        <div class="web-layer"></div>
-        <!-- Top Navigation -->
-        <nav class="top-nav">
-            <a href="../index.html"><i class="fas fa-home"></i> Home</a>
-            <a href="../html/contact.html"><i class="fas fa-envelope"></i> Contact</a>
-        </nav>
-        <!-- Gallery Content -->
-        <div class="gallery-content">
-            <!-- Desktop Grid View -->
-            <div class="gallery-grid desktop-view" id="desktop-gallery"></div>
-
-            <!-- Mobile Random Movement View -->
-            <div class="gallery-random mobile-view" id="mobile-gallery"></div>
-
-            <!-- Scroll Indicator for Mobile -->
-            <div class="scroll-indicator">
-                <i class="fas fa-chevron-up"></i>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+        <a href="../html/contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+    <!-- Gallery Content -->
+    <div class="gallery-content">
+        <div class="carousel-container">
+            <div class="carousel" id="carousel">
+                <!-- Images will be dynamically added here -->
+            </div>
+            <div class="carousel-nav">
+                <button class="carousel-arrow left" id="left-arrow"><i class="fas fa-chevron-left"></i></button>
+                <button class="carousel-arrow right" id="right-arrow"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="carousel-dots" id="carousel-dots">
+                <!-- Dots will be dynamically added here -->
             </div>
         </div>
-        <!-- Bottom Social Icons -->
-        <div class="social-nav">
-            <a href="https://onlyfans.com/Goddesslyx" target="_blank"><i class="fas fa-heart"></i></a>
-            <a href="https://t.me/goddesslyxpremades" target="_blank"><i class="fab fa-telegram-plane"></i></a>
-            <a href="https://www.instagram.com/solesbylyx/" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/Goddesslyx" target="_blank"><i class="fab fa-x-twitter"></i></a>
-        </div>
+    </div>
+    <!-- Bottom Social Icons -->
+    <div class="social-nav">
+        <a href="https://onlyfans.com/Goddesslyx" target="_blank"><i class="fas fa-heart"></i></a>
+        <a href="https://t.me/goddesslyxpremades" target="_blank"><i class="fab fa-telegram-plane"></i></a>
+        <a href="https://www.instagram.com/solesbylyx/" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://x.com/Goddesslyx" target="_blank"><i class="fab fa-x-twitter"></i></a>
     </div>
     <script src="../scripts/gallery.js"></script>
-    <script src="../scripts/background.js"></script>
-    <!-- Iamges -->
-    <script>
-        const imageNumbers = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
-        
-        const desktopGallery = document.getElementById('desktop-gallery');
-        const mobileGallery = document.getElementById('mobile-gallery');
-
-        imageNumbers.forEach(num => {
-            const desktopDiv = document.createElement('div');
-            desktopDiv.className = 'gallery-item';
-            desktopDiv.innerHTML = `<img src="../images/${num}.png" alt="${num}">`;
-            desktopGallery.appendChild(desktopDiv);
-
-            const mobileDiv = document.createElement('div');
-            mobileDiv.className = 'random-item';
-            mobileDiv.innerHTML = `<img src="../images/${num}.png" alt="${num}">`;
-            mobileGallery.appendChild(mobileDiv);
-        });
-    </script>
 </body>
 </html>
