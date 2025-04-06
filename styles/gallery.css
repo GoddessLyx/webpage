@@ -1,5 +1,12 @@
 /*==================== NEW BACKGROUND ====================*/
-html {
+/* Body and General Styling */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
     --s: 60px; /* control the size*/
     --c1: #b09f7980;
     --c2: #23303a;
@@ -134,17 +141,20 @@ html {
 
 .carousel {
     display: flex;
-    transition: transform 0.5s ease;
-    gap: 20px;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Snap to each item */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    scroll-behavior: smooth; /* Smooth scrolling for arrow navigation */
 }
 
 .carousel-item {
-    position: relative;
     flex: 0 0 100%; /* Each item takes the full width of the container */
+    scroll-snap-align: center; /* Snap to the center of the viewport */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .carousel-item img {
@@ -301,7 +311,26 @@ html {
     .social-nav a {
         font-size: 1.2rem;
     }
-    
+
+    .gallery-content {
+        padding: 20px 20px;
+    }
+
+    .carousel-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .carousel {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .carousel-item {
+        flex: 0 0 100vw; /* Full viewport width on mobile */
+        scroll-snap-align: center;
+    }
+
     .carousel-item img {
         max-width: 90vw;
         max-height: 60vh;

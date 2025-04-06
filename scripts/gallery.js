@@ -69,8 +69,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update carousel position and active dot
     function updateCarousel() {
-        const offset = -currentIndex * 100; // Move by 100% of the container width
-        carousel.style.transform = `translateX(${offset}%)`;
+        const itemWidth = items[0].offsetWidth; // Width of one carousel item
+        const scrollPosition = currentIndex * itemWidth;
+
+        // Scroll to the current item
+        carousel.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
 
         // Update active dot
         dots.forEach((dot, index) => {
@@ -93,6 +99,18 @@ document.addEventListener('DOMContentLoaded', () => {
     rightArrow.addEventListener('click', () => {
         if (currentIndex < items.length - 1) {
             currentIndex++;
+            updateCarousel();
+        }
+    });
+
+    // Update currentIndex based on scroll position
+    carousel.addEventListener('scroll', () => {
+        const itemWidth = items[0].offsetWidth;
+        const scrollPosition = carousel.scrollLeft;
+        const newIndex = Math.round(scrollPosition / itemWidth);
+
+        if (newIndex !== currentIndex) {
+            currentIndex = newIndex;
             updateCarousel();
         }
     });
@@ -129,4 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial update
     updateCarousel();
+
+    // Update on window resize to ensure proper centering
+    window.addEventListener('resize', updateCarousel);
 });
