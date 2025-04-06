@@ -70,7 +70,7 @@ p {
 
 .contact-image {
     width: 100%;
-    height: 120px; /* Adjust height for the image */
+    height: 200px; /* Adjust height for the image */
     background-size: cover;
     background-position: center;
     border-radius: 5px;
@@ -78,19 +78,19 @@ p {
 
 /* Placeholder images for each platform (replace with actual image paths) */
 .contact-image.onlyfans {
-    background-image: url('../images/onlyfans-image.jpg');
+    background-image: url('../icons/blue.png');
 }
 
 .contact-image.telegram {
-    background-image: url('../images/telegram-image.jpg');
+    background-image: url('../icons/telegram.png');
 }
 
 .contact-image.instagram {
-    background-image: url('../images/instagram-image.jpg');
+    background-image: url('../icons/instagram.png');
 }
 
 .contact-image.x-twitter {
-    background-image: url('../icons/x.jpeg');
+    background-image: url('../icons/x.png');
 }
 
 .contact-link span {
@@ -201,7 +201,7 @@ p {
     }
 
     .contact-image {
-        height: 90px;
+        height: 160px;
     }
 
     .contact-link span {
