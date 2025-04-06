@@ -7,7 +7,6 @@ body, html {
     height: 100%;
     overflow-x: hidden;
     overflow-y: hidden;
-    --s: 60px; /* control the size*/
     --c1: #b09f7980;
     --c2: #23303a;
 
@@ -123,7 +122,7 @@ body, html {
 .gallery-content {
     position: relative;
     z-index: 1;
-    padding: 80px 20px;
+    padding: 0 20px;
     text-align: center;
     min-height: 100vh;
     display: flex;
@@ -136,20 +135,21 @@ body, html {
     position: relative;
     max-width: 800px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow-x: visible;
 }
 
 .carousel {
     display: flex;
-    overflow-x: auto; /* Allow horizontal scrolling */
-    scroll-snap-type: x mandatory; /* Snap to each item */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scroll-behavior: smooth; /* Smooth scrolling for arrow navigation */
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 0 calc((100vw - 95vw) / 2); /* Add padding to center items */
 }
 
 .carousel-item {
     flex: 0 0 100%; /* Each item takes the full width of the container */
-    scroll-snap-align: center; /* Snap to the center of the viewport */
+    scroll-snap-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -164,7 +164,6 @@ body, html {
     max-height: 70vh;
     object-fit: cover;
     border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     filter: brightness(1.1);
     transition: transform 0.3s ease, filter 0.3s ease;
 }
@@ -176,63 +175,11 @@ body, html {
 
 /* Description below each image */
 .carousel-item .description {
-    margin-top: 10px;
+    margin-top: 30px;
     font-family: 'Cinzel', serif;
     font-size: 1rem;
     color: #ff004d;
     text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-}
-
-/* Shading lines background for each image */
-.carousel-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: linear-gradient(
-        45deg,
-        rgba(255, 0, 77, 0.2) 25%,
-        transparent 25%,
-        transparent 75%,
-        rgba(255, 0, 77, 0.2) 75%,
-        rgba(255, 0, 77, 0.2)
-    ),
-    linear-gradient(
-        45deg,
-        rgba(255, 0, 77, 0.2) 25%,
-        transparent 25%,
-        transparent 75%,
-        rgba(255, 0, 77, 0.2) 75%,
-        rgba(255, 0, 77, 0.2)
-    );
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
-    opacity: 0.5;
-}
-
-/* Customize shading lines for specific images (adjust colors as needed) */
-.carousel-item:nth-child(odd)::before {
-    background: linear-gradient(
-        45deg,
-        rgba(200, 150, 100, 0.2) 25%,
-        transparent 25%,
-        transparent 75%,
-        rgba(200, 150, 100, 0.2) 75%,
-        rgba(200, 150, 100, 0.2)
-    ),
-    linear-gradient(
-        45deg,
-        rgba(200, 150, 100, 0.2) 25%,
-        transparent 25%,
-        transparent 75%,
-        rgba(200, 150, 100, 0.2) 75%,
-        rgba(200, 150, 100, 0.2)
-    );
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
 }
 
 /*==================== CAROUSEL NAVIGATION ====================*/
@@ -312,10 +259,6 @@ body, html {
         font-size: 1.2rem;
     }
 
-    .gallery-content {
-        padding: 20px 20px;
-    }
-
     .carousel-container {
         max-width: 100%;
         padding: 0;
@@ -324,15 +267,16 @@ body, html {
     .carousel {
         scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
+        padding: 0 calc((100vw - 95vw) / 2); /* Center items by adding padding */
     }
 
     .carousel-item {
-        flex: 0 0 100vw; /* Full viewport width on mobile */
+        flex: 0 0 95vw; /* Slightly less than full viewport width */
         scroll-snap-align: center;
     }
 
     .carousel-item img {
-        max-width: 90vw;
+        max-width: 85vw;
         max-height: 60vh;
     }
 

@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update carousel position and active dot
     function updateCarousel() {
-        const itemWidth = items[0].offsetWidth; // Width of one carousel item
+        // Calculate the scroll position based on the current index
+        const itemWidth = carousel.offsetWidth; // Width of the carousel container
         const scrollPosition = currentIndex * itemWidth;
 
         // Scroll to the current item
@@ -105,13 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update currentIndex based on scroll position
     carousel.addEventListener('scroll', () => {
-        const itemWidth = items[0].offsetWidth;
+        const itemWidth = carousel.offsetWidth;
         const scrollPosition = carousel.scrollLeft;
         const newIndex = Math.round(scrollPosition / itemWidth);
 
         if (newIndex !== currentIndex) {
             currentIndex = newIndex;
-            updateCarousel();
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+            leftArrow.style.display = currentIndex === 0 ? 'none' : 'flex';
+            rightArrow.style.display = currentIndex === items.length - 1 ? 'none' : 'flex';
         }
     });
 
@@ -129,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function handleSwipe() {
-        const swipeThreshold = 50; // Minimum swipe distance to trigger navigation
+        const swipeThreshold = 20; // Lowered threshold for more sensitivity (was 50)
         if (touchStartX - touchEndX > swipeThreshold) {
             // Swipe left (next)
             if (currentIndex < items.length - 1) {
