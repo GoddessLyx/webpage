@@ -23,48 +23,11 @@
         <!-- Gallery Content -->
         <div class="gallery-content">
             <!-- Desktop Grid View -->
-            <div class="gallery-grid desktop-view">
-                <div class="gallery-item"><img src="../images/1.jpeg" alt="Foot Image 1"></div>
-                <div class="gallery-item"><img src="../images/2.jpeg" alt="Foot Image 2"></div>
-                <div class="gallery-item"><img src="../images/3.png" alt="Foot Image 3"></div>
-                <div class="gallery-item"><img src="../images/4.png" alt="Foot Image 4"></div>
-                <div class="gallery-item"><img src="../images/5.jpeg" alt="Foot Image 5"></div>
-                <div class="gallery-item"><img src="../images/7.png" alt="Foot Image 7"></div>
-                <div class="gallery-item"><img src="../images/8.png" alt="Foot Image 8"></div>
-                <div class="gallery-item"><img src="../images/9.png" alt="Foot Image 9"></div>
-                <div class="gallery-item"><img src="../images/10.png" alt="Foot Image 10"></div>
-                <div class="gallery-item"><img src="../images/11.png" alt="Foot Image 11"></div>
-                <div class="gallery-item"><img src="../images/12.png" alt="Foot Image 12"></div>
-                <div class="gallery-item"><img src="../images/13.png" alt="Foot Image 13"></div>
-                <div class="gallery-item"><img src="../images/14.png" alt="Foot Image 14"></div>
-                <div class="gallery-item"><img src="../images/15.png" alt="Foot Image 15"></div>
-                <div class="gallery-item"><img src="../images/16.png" alt="Foot Image 16"></div>
-                <div class="gallery-item"><img src="../images/17.png" alt="Foot Image 17"></div>
-                <div class="gallery-item"><img src="../images/18.png" alt="Foot Image 18"></div>
-                <div class="gallery-item"><img src="../images/19.png" alt="Foot Image 19"></div>
-                
-            </div>
+            <div class="gallery-grid desktop-view" id="desktop-gallery"></div>
+
             <!-- Mobile Random Movement View -->
-            <div class="gallery-random mobile-view">
-                <div class="random-item"><img src="../images/1.jpeg" alt="Foot Image 1"></div>
-                <div class="random-item"><img src="../images/2.jpeg" alt="Foot Image 2"></div>
-                <div class="random-item"><img src="../images/3.png" alt="Foot Image 3"></div>
-                <div class="random-item"><img src="../images/4.png" alt="Foot Image 4"></div>
-                <div class="random-item"><img src="../images/5.jpeg" alt="Foot Image 5"></div>
-                <div class="random-item"><img src="../images/7.png" alt="Foot Image 7"></div>
-                <div class="random-item"><img src="../images/8.png" alt="Foot Image 8"></div>
-                <div class="random-item"><img src="../images/9.png" alt="Foot Image 9"></div>
-                <div class="random-item"><img src="../images/10.png" alt="Foot Image 10"></div>
-                <div class="random-item"><img src="../images/11.png" alt="Foot Image 11"></div>
-                <div class="random-item"><img src="../images/12.png" alt="Foot Image 12"></div>
-                <div class="random-item"><img src="../images/13.png" alt="Foot Image 13"></div>
-                <div class="random-item"><img src="../images/14.png" alt="Foot Image 14"></div>
-                <div class="random-item"><img src="../images/15.png" alt="Foot Image 15"></div>
-                <div class="random-item"><img src="../images/16.png" alt="Foot Image 16"></div>
-                <div class="random-item"><img src="../images/17.png" alt="Foot Image 17"></div>
-                <div class="random-item"><img src="../images/18.png" alt="Foot Image 18"></div>
-                <div class="random-item"><img src="../images/19.png" alt="Foot Image 19"></div>
-            </div>
+            <div class="gallery-random mobile-view" id="mobile-gallery"></div>
+
             <!-- Scroll Indicator for Mobile -->
             <div class="scroll-indicator">
                 <i class="fas fa-chevron-up"></i>
@@ -79,5 +42,25 @@
         </div>
     </div>
     <script src="../scripts/gallery.js"></script>
+    <script src="../scripts/background.js"></script>
+    <!-- Iamges -->
+    <script>
+        const imageNumbers = [1, 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34];
+        
+        const desktopGallery = document.getElementById('desktop-gallery');
+        const mobileGallery = document.getElementById('mobile-gallery');
+
+        imageNumbers.forEach(num => {
+            const desktopDiv = document.createElement('div');
+            desktopDiv.className = 'gallery-item';
+            desktopDiv.innerHTML = `<img src="../images/${num}.png" alt="${num}">`;
+            desktopGallery.appendChild(desktopDiv);
+
+            const mobileDiv = document.createElement('div');
+            mobileDiv.className = 'random-item';
+            mobileDiv.innerHTML = `<img src="../images/${num}.png" alt="${num}">`;
+            mobileGallery.appendChild(mobileDiv);
+        });
+    </script>
 </body>
 </html>

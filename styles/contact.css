@@ -1,59 +1,20 @@
-/****************************** MAIN BODY ******************************/
-body::-webkit-scrollbar {
-    width: 4px;
-}
+/*==================== NEW BACKGROUND ====================*/
+html {
+    --s: 60px; /* control the size*/
+    --c1: #b09f7980;
+    --c2: #23303a;
+    
+    --_g: #0000 83%,var(--c1) 85% 99%,#0000 101%;
+    background:
+      radial-gradient(27% 29% at right ,var(--_g)) calc(var(--s)/ 2) var(--s),
+      radial-gradient(27% 29% at left  ,var(--_g)) calc(var(--s)/-2) var(--s),
+      radial-gradient(29% 27% at top   ,var(--_g)) 0 calc(var(--s)/ 2),
+      radial-gradient(29% 27% at bottom,var(--_g)) 0 calc(var(--s)/-2)
+      var(--c2);
+    background-size: calc(2*var(--s)) calc(2*var(--s));
+  }
 
-body::-webkit-scrollbar-thumb {
-    background-color: black;
-    border-radius: 10px;
-}
-
-body::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-/*==================== BACKGROUND LAYERS ====================*/
-.particles::before, .particles::after {
-    content: '';
-    position: absolute;
-    width: 3px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 50%;
-    animation: move-random 5s infinite ease-in-out;
-}
-
-.particles::after {
-    animation-delay: 2s;
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 0, 0, 0.7);
-}
-
-.debris::before, .debris::after, 
-.debris span::before, .debris span::after,
-.debris div::before, .debris div::after {
-    content: '';
-    position: absolute;
-    background: rgba(200, 0, 200, 0.5);
-    border-radius: 50%;
-    animation: move-slow 15s infinite ease-in-out;
-}
-
-.debris::before { width: 6px; height: 6px; animation-delay: 0s; top: 5%; }
-.debris::after { width: 8px; height: 8px; animation-delay: 3s; bottom: 5%; }
-.debris span::before { width: 5px; height: 5px; animation-delay: 6s; top: 10%; }
-.debris span::after { width: 7px; height: 7px; animation-delay: 9s; bottom: 10%; }
-.debris div::before { width: 4px; height: 4px; animation-delay: 12s; top: 15%; }
-.debris div::after { width: 6px; height: 6px; animation-delay: 15s; bottom: 15%; }
-
-.debris span, .debris div {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-/*==================== CONTACT PAGE LAYERS ====================*/
+/*==================== CONTACT PAGE STYLES ====================*/
 .contact-content {
     position: relative;
     z-index: 1;
@@ -81,63 +42,126 @@ p {
 
 .contact-links {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
 .contact-link {
-    color: #ff004d;
-    font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
-    text-decoration: none;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 10px 20px;
+    justify-content: space-between;
+    width: 150px; /* Fixed width for the box */
+    height: 200px; /* Fixed height for the box */
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
     border: 2px solid #ff004d;
-    border-radius: 5px;
+    border-radius: 10px;
+    text-decoration: none;
     box-shadow: 0 0 10px rgba(255, 0, 77, 0.5);
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .contact-link:hover {
-    background: #ff004d;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 77, 0.8);
+}
+
+.contact-image {
+    width: 100%;
+    height: 120px; /* Adjust height for the image */
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+}
+
+/* Placeholder images for each platform (replace with actual image paths) */
+.contact-image.onlyfans {
+    background-image: url('../images/onlyfans-image.jpg');
+}
+
+.contact-image.telegram {
+    background-image: url('../images/telegram-image.jpg');
+}
+
+.contact-image.instagram {
+    background-image: url('../images/instagram-image.jpg');
+}
+
+.contact-image.x-twitter {
+    background-image: url('../icons/x.jpeg');
+}
+
+.contact-link span {
+    color: #ff004d;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.contact-link:hover span {
     color: #fff;
 }
 
-@keyframes cosmic-swirl {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes move-random {
-    0% { transform: translate(0, 0); opacity: 0; }
-    20% { transform: translate(100vw, 50vh); opacity: 1; }
-    40% { transform: translate(20vw, 80vh); }
-    60% { transform: translate(80vw, 20vh); }
-    80% { transform: translate(50vw, 70vh); }
-    100% { transform: translate(0, 0); opacity: 0; }
-}
-
+/* Remove old background animations */
+@keyframes cosmic-swirl,
+@keyframes move-random,
+@keyframes move-random-alt,
 @keyframes move-slow {
-    0% { transform: translate(30vw, 0); opacity: 0.5; }
-    25% { transform: translate(70vw, 10vh); opacity: 1; }
-    50% { transform: translate(20vw, 20vh); }
-    75% { transform: translate(80vw, 10vh); }
-    100% { transform: translate(30vw, 0); opacity: 0.5; }
+    /* Remove these animations */
 }
 
-.particles::before {
-    animation: move-random-alt 7s infinite ease-in-out;
+/*==================== TOP MENU ====================*/
+.top-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 20px;
 }
 
-@keyframes move-random-alt {
-    0% { transform: translate(50vw, 10vh); opacity: 0; }
-    25% { transform: translate(10vw, 90vh); opacity: 1; }
-    50% { transform: translate(90vw, 30vh); }
-    75% { transform: translate(30vw, 60vh); }
-    100% { transform: translate(50vw, 10vh); opacity: 0; }
+.top-nav a {
+    color: #ff004d;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
+    transition: color 0.3s ease;
+}
+
+.top-nav a:hover {
+    color: #ff66b3;
+}
+
+/*==================== CONTACT MENU ====================*/
+.social-nav {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    gap: 15px;
+}
+
+.social-nav a {
+    color: #ff004d;
+    font-size: 1.5rem;
+    text-decoration: none;
+    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
+    transition: color 0.3s ease;
+}
+
+.social-nav a:hover {
+    color: #ff66b3;
 }
 
 /****************************** MOBILE DESIGN ******************************/
@@ -150,8 +174,37 @@ p {
         font-size: 0.9rem;
     }
 
+    .top-nav {
+        top: 10px;
+        left: 10px;
+        gap: 10px;
+    }
+    
+    .top-nav a {
+        font-size: 1.2rem;
+        gap: 5px;
+    }
+
+    .social-nav {
+        bottom: 10px;
+        right: 10px;
+        gap: 10px;
+    }
+
+    .social-nav a {
+        font-size: 1.2rem;
+    }
+
     .contact-link {
-        font-size: 1rem;
-        padding: 8px 16px;
+        width: 120px;
+        height: 160px;
+    }
+
+    .contact-image {
+        height: 90px;
+    }
+
+    .contact-link span {
+        font-size: 0.9rem;
     }
 }
