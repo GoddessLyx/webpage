@@ -67,16 +67,31 @@
     opacity: 0.9;
 }
 
-/****************************** MAIN PAGE ******************************/
-.background {
-    position: relative;
+/****************************** MAIN CONTENT ******************************/
+.main-content {
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    overflow-y: auto; /* Allow scrolling between sections */
+    scroll-snap-type: y mandatory; /* Snap to each section */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Each section takes the full viewport height */
+.hero-section,
+.intro-section {
     width: 100%;
     height: 100vh;
-    background: linear-gradient(45deg, #000 20%, rgba(245, 232, 208, 0.9) 80%); /* Reduced black area */
-    overflow: hidden;
+    scroll-snap-align: start; /* Snap to the top of each section */
+    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+}
+
+/****************************** HERO SECTION (First View) ******************************/
+.hero-section {
+    position: relative;
 }
 
 .cream-layer {
@@ -84,10 +99,190 @@
     width: 100%;
     height: 100%;
     background: url('../images/intro.jpeg') center/cover no-repeat;
-    opacity: 0.7; /* Increased visibility */
+    opacity: 0.7;
     mix-blend-mode: overlay;
     z-index: 0;
     animation: scale-bg 20s infinite ease-in-out;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 4rem;
+    margin: 0;
+    padding: 0 20px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* First part: colorful cosmic style */
+.cosmos-text {
+    background: linear-gradient(90deg, #00ffff, #7fff00, #ffff00, #8a2be2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Second part: red goddess style */
+.goddess-text {
+    color: #ff0015;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 0, 77, 0.6);
+}
+
+.discover-btn {
+    margin-top: 100px;
+    padding: 12px 36px;
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #fff;
+    background: linear-gradient(135deg, #ff004d, #ff66b3, #ff004d);
+    background-size: 300% 100%;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 0, 77, 0.7), 0 0 40px rgba(255, 105, 180, 0.5);
+    transition: all 0.4s ease-in-out;
+    animation: pulse-glow 2s infinite;
+}
+
+.discover-btn:hover {
+    transform: scale(1.1);
+    background-position: 100% 0;
+    box-shadow: 0 0 30px rgba(255, 0, 77, 0.9), 0 0 60px rgba(255, 105, 180, 0.7);
+}
+
+/* Glowing pulse animation */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 0 15px rgba(255, 0, 77, 0.6), 0 0 30px rgba(255, 105, 180, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(255, 0, 77, 1), 0 0 50px rgba(255, 105, 180, 0.6);
+    }
+}
+
+.scroll-arrow {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 2rem;
+    color: #ff0015;
+    animation: bounce 1.5s infinite;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/****************************** INTRO SECTION (Second View) ******************************/
+.intro-section {
+    /* Define variables for colors and sizes */
+    --dark-red: #cabd91; /* Deep, blood-like red */
+    --black: #3a2600; /* Almost black */
+    --accent-red: #776500; /* Theme accent color */
+    --size: 80px; /* Size for the pattern */
+
+    /* Create a layered background with a seductive yet unsettling pattern */
+    background:
+        /* Layer 1: Subtle footprint-like pattern using radial gradients */
+        radial-gradient(circle at 20% 30%, var(--dark-red) 5%, transparent 10%),
+        radial-gradient(circle at 80% 70%, var(--dark-red) 5%, transparent 10%),
+        radial-gradient(circle at 50% 50%, var(--dark-red) 3%, transparent 8%),
+        /* Layer 2: Lace-like texture using a repeating linear gradient */
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 187, 0, 0.2) 10px,
+            rgba(255, 187, 0, 0.2) 20px
+        ),
+        /* Layer 3: Base gradient for depth */
+        linear-gradient(135deg, var(--black) 0%, var(--dark-red) 50%, var(--black) 100%);
+    background-size: 100% 100%, var(--size) var(--size), 100% 100%;
+    background-position: 0 0, 0 0, 0 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a pulsating overlay to make the background feel "alive" */
+.intro-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 0, 77, 0.3) 0%, transparent 70%);
+    opacity: 0.5;
+    animation: pulse-bg 3s infinite ease-in-out;
+    z-index: 0;
+}
+
+@keyframes pulse-bg {
+    0% { transform: scale(1); opacity: 0.3; }
+    50% { transform: scale(1.2); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 0.3; }
+}
+
+.intro-content {
+    background: rgba(0, 0, 0, 0.9); /* Darker, more opaque background */
+    border: 2px solid var(--accent-red);
+    border-radius: 0; /* Remove rounded corners for a sharper look */
+    padding: 20px;
+    max-width: 600px;
+    box-shadow: 0 0 30px rgba(255, 0, 77, 0.7), inset 0 0 10px rgba(255, 0, 77, 0.3);
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    /* Add a jagged border effect using a pseudo-element */
+    overflow: hidden;
+}
+
+.intro-content::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px dashed var(--accent-red);
+    z-index: -1;
+    animation: flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.intro-text {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 0;
+    padding: 0 20px;
+    text-shadow: 0 0 10px var(--accent-red), 0 0 20px var(--accent-red);
+    letter-spacing: 1px;
+    line-height: 1.5;
+    animation: text-glow 2s infinite ease-in-out;
+}
+
+@keyframes text-glow {
+    0% { text-shadow: 0 0 10px var(--accent-red), 0 0 20px var(--accent-red); }
+    50% { text-shadow: 0 0 15px var(--accent-red), 0 0 30px var(--accent-red); }
+    100% { text-shadow: 0 0 10px var(--accent-red), 0 0 20px var(--accent-red); }
 }
 
 /****************************** FLOATING ELEMENTS ******************************/
@@ -95,14 +290,14 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 2;
+    z-index: 1;
 }
 
 .shoe {
     position: absolute;
-    width: 30px;
-    height: 30px;
-    background-size: contain; /* to show the entire image */
+    width: 140px;
+    height: 140px;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     animation: pulse 5s infinite ease-in-out;
@@ -113,129 +308,54 @@
     position: absolute;
     width: 30px;
     height: 40px;
-    background-size: contain; /* to show the entire image */
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     animation: pulse 5s infinite ease-in-out;
     filter: drop-shadow(0 0 10px rgba(255, 0, 77, 0.5));
 }
 
-/* Assign different heel images to each shoe */
-.shoe-1 { 
-    background: url('../icons/h1.png') center; 
-    top: 15%; 
-    left: 15%; 
-    animation-delay: 0s; 
-}
-.shoe-2 { 
-    background: url('../icons/h2.png') center; 
-    top: 45%; 
-    left: 65%; 
-    animation-delay: 2s; 
-}
+/* Assign different heel images to each shoe (Intro Section) */
 .shoe-3 { 
-    background: url('../icons/h3.png') center; 
+    background: url('../icons/heel.png') center; 
     top: 75%; 
-    left: 25%; 
+    left: 65%; 
     animation-delay: 4s; 
 }
-.shoe-4 { 
-    background: url('../icons/h4.png') center; 
-    top: 25%; 
-    left: 75%; 
-    animation-delay: 1s; 
-}
-.shoe-5 { 
-    background: url('../icons/h5.png') center; 
-    top: 65%; 
-    left: 10%; 
-    animation-delay: 3s; 
-}
 
-/* Assign different kiss images to each kiss */
+/* Assign different kiss images to each kiss (Hero Section) */
 .kiss-1 { 
-    background: url('../icons/k1.png') center; 
+    background: url('../icons/kiss.png') center; 
     top: 20%; 
     left: 60%; 
     animation-delay: 1s; 
 }
 .kiss-2 { 
-    background: url('../icons/k1.png') center; 
+    background: url('../icons/kiss.png') center; 
     top: 55%; 
     left: 20%; 
     animation-delay: 3s; 
 }
 .kiss-3 { 
-    background: url('../icons/k1.png') center; 
+    background: url('../icons/kiss.png') center; 
     top: 85%; 
-    left: 70%; 
+    left: 40%; 
     animation-delay: 5s; 
 }
 .kiss-4 { 
-    background: url('../icons/k1.png') center; 
-    top: 85%; 
-    left: 70%; 
-    animation-delay: 5s; 
+    background: url('../icons/kiss.png') center; 
+    top: 30%; 
+    left: 40%; 
+    animation-delay: 2s; 
 }
 .kiss-5 { 
-    background: url('../icons/k1.png') center; 
-    top: 85%; 
-    left: 70%; 
-    animation-delay: 5s; 
-}
-
-/* Animate them */
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.3); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.7; }
-}
-
-/****************************** CONTENT ******************************/
-.content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
-    padding: 20px;
-}
-
-.text-container {
-    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
-    border-radius: 15px;
-    padding: 20px;
-    max-width: 600px;
-    box-shadow: 0 0 20px rgba(255, 0, 77, 0.3);
-}
-
-h1 {
-    color: #ff004d;
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.5rem;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 0, 77, 0.6);
-    margin: 0;
-    padding: 0 20px;
-    line-height: 1.2;
-}
-
-.intro-text {
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-    color: #fff;
-    margin-top: 10px;
-    padding: 0 20px;
+    background: url('../icons/kiss.png') center; 
+    top: 70%; 
+    left: 30%; 
+    animation-delay: 4s; 
 }
 
 /****************************** ANIMATIONS ******************************/
-@keyframes flow {
-    0% { background-position: 0 0; }
-    100% { background-position: 100% 0; }
-}
-
 @keyframes scale-bg {
     0% { transform: scale(1); }
     50% { transform: scale(1.1); }
@@ -250,16 +370,42 @@ h1 {
 
 /****************************** MOBILE DESIGN ******************************/
 @media (max-width: 768px) {
+    .main-content {
+        scroll-snap-type: y mandatory;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .hero-section,
+    .intro-section {
+        height: 100vh;
+        scroll-snap-align: start;
+    }
+
     h1 {
         font-size: 2.5rem;
+    }
+
+    .discover-btn {
+        padding: 8px 25px;
+        font-size: 1rem;
     }
 
     .intro-text {
         font-size: 0.9rem;
     }
 
-    .text-container {
+    .intro-content {
         padding: 15px;
         max-width: 90%;
+    }
+
+    .shoe {
+        width: 140px;
+        height: 140px;
+    }
+
+    .kiss {
+        width: 25px;
+        height: 25px;
     }
 }

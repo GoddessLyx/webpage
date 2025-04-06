@@ -1,10 +1,11 @@
 document.addEventListener('DOMContentLoaded', function () {
-    console.log('JavaScript loaded successfully'); // Debug log
+    console.log('JavaScript loaded successfully');
 
     const ageVerification = document.getElementById('age-verification');
-    const backgroundContent = document.querySelector('.background');
+    const backgroundContent = document.querySelector('.main-content');
 
-    // Ensure elements are found
+    console.log('Elements found:', { ageVerification, backgroundContent });
+
     if (!ageVerification || !backgroundContent) {
         console.error('One or more elements not found:', {
             ageVerification,
@@ -13,10 +14,9 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
     }
 
-    // Show age verification by default (remove 'hidden' class if needed)
     ageVerification.classList.remove('hidden');
+    console.log('Age verification shown');
 
-    // Age verification logic
     document.getElementById('age-yes').addEventListener('click', function () {
         ageVerification.classList.add('hidden');
         backgroundContent.classList.remove('hidden');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('age-no').addEventListener('click', function () {
         alert('You must be 18 or older to access this page.');
-        window.location.href = 'https://www.google.com'; // Redirect to another page
+        window.location.href = 'https://www.google.com';
         console.log('Age verification failed (No), redirecting');
     });
 });
