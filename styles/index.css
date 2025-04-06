@@ -188,35 +188,13 @@ h1 {
 
 /****************************** INTRO SECTION (Second View) ******************************/
 .intro-section {
-    /* Define variables for colors and sizes */
-    --dark-red: #cabd91; /* Deep, blood-like red */
-    --black: #3a2600; /* Almost black */
-    --accent-red: #776500; /* Theme accent color */
-    --size: 80px; /* Size for the pattern */
-
-    /* Create a layered background with a seductive yet unsettling pattern */
-    background:
-        /* Layer 1: Subtle footprint-like pattern using radial gradients */
-        radial-gradient(circle at 20% 30%, var(--dark-red) 5%, transparent 10%),
-        radial-gradient(circle at 80% 70%, var(--dark-red) 5%, transparent 10%),
-        radial-gradient(circle at 50% 50%, var(--dark-red) 3%, transparent 8%),
-        /* Layer 2: Lace-like texture using a repeating linear gradient */
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 187, 0, 0.2) 10px,
-            rgba(255, 187, 0, 0.2) 20px
-        ),
-        /* Layer 3: Base gradient for depth */
-        linear-gradient(135deg, var(--black) 0%, var(--dark-red) 50%, var(--black) 100%);
-    background-size: 100% 100%, var(--size) var(--size), 100% 100%;
-    background-position: 0 0, 0 0, 0 0;
+    /* Background color: Light beige */
+    background: #f5f0e1;
     position: relative;
     overflow: hidden;
 }
 
-/* Add a pulsating overlay to make the background feel "alive" */
+/* Add a subtle paper-like texture using a noise overlay */
 .intro-section::before {
     content: '';
     position: absolute;
@@ -224,16 +202,9 @@ h1 {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(255, 0, 77, 0.3) 0%, transparent 70%);
-    opacity: 0.5;
-    animation: pulse-bg 3s infinite ease-in-out;
+    background-color: #fffdd0;
+    background-image: url("https://www.transparenttextures.com/patterns/gray-floral.png");
     z-index: 0;
-}
-
-@keyframes pulse-bg {
-    0% { transform: scale(1); opacity: 0.3; }
-    50% { transform: scale(1.2); opacity: 0.5; }
-    100% { transform: scale(1); opacity: 0.3; }
 }
 
 .intro-content {
@@ -302,6 +273,10 @@ h1 {
     background-repeat: no-repeat;
     animation: pulse 5s infinite ease-in-out;
     filter: drop-shadow(0 0 10px rgba(255, 0, 77, 0.5));
+    background: url('../icons/heel.png') center; 
+    top: 75%; 
+    left: 65%; 
+    animation-delay: 4s;
 }
 
 .kiss {
@@ -313,14 +288,6 @@ h1 {
     background-repeat: no-repeat;
     animation: pulse 5s infinite ease-in-out;
     filter: drop-shadow(0 0 10px rgba(255, 0, 77, 0.5));
-}
-
-/* Assign different heel images to each shoe (Intro Section) */
-.shoe-3 { 
-    background: url('../icons/heel.png') center; 
-    top: 75%; 
-    left: 65%; 
-    animation-delay: 4s; 
 }
 
 /* Assign different kiss images to each kiss (Hero Section) */
@@ -396,17 +363,13 @@ h1 {
 
     .intro-content {
         padding: 15px;
+        top: -10%;
         max-width: 90%;
     }
 
     .shoe {
-        width: 140px;
-        height: 140px;
-    }
-    .shoe-3 { 
-        top: 60%; 
+        top: 65%; 
         left: 60%; 
-        animation-delay: 4s; 
     }
 
     .kiss {
