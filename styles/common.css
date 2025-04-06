@@ -6,150 +6,18 @@ body, html {
     width: 100%;
     height: 100%;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(120deg, #0e0e0e 30%, #f5ebdc 70%);
-    color: #f5ebdc;
-    scroll-behavior: smooth;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    scrollbar-width: thin;
-    scrollbar-color: #ff004d transparent; /* Customize scrollbar color */
-    overflow-x: hidden; /* Disable horizontal scrolling */
-    overflow-y: auto;
-    padding-right: 2px;
-}
-
-/* Custom scrollbar styles */
-body::-webkit-scrollbar {
-    width: 1px; /* Thin scrollbar width */
-}
-body::-webkit-scrollbar-thumb {
-    border-radius: 4px; /* Rounded scrollbar thumb */
-}
-body::-webkit-scrollbar-track {
-    background: transparent; /* Transparent track */
-}
-
-/*==================== BACKGROUND LAYERS ====================*/
-.background {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background: radial-gradient(circle, #fffdd0 5%, #000 80%);
     overflow: hidden;
-}
-  
-.flowing-lines {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><path d="M0 100 Q 200 50, 400 100 T 800 100 T 1200 100 T 1600 100" fill="none" stroke="rgba(255, 255, 255, 0.1)" stroke-width="2"/></svg>') repeat-x;
-    opacity: 0.2;
-    animation: flow 20s linear infinite;
-    z-index: 1;
-}
-
-.cosmic-layer, .web-layer, .particles, .debris {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.web-layer {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" opacity="0.3"><path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" fill="none" stroke="rgba(194, 137, 16, 0.5)"/><path d="M10 10 L90 90 M90 10 L10 90" stroke="rgba(255, 255, 255, 0.2)"/></svg>') repeat;
-    opacity: 0.5;
-}
-
-/* Light Source Effect (Optional Glow) */
-.light {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
-    filter: blur(60px);
-    animation: moveLight 20s infinite alternate ease-in-out;
-    pointer-events: none;
-}
-  
-/* Debris (General Stars and Cosmic Objects) */
-.debris {
-    position: fixed;
-    border-radius: 50%;
-    animation: floatDebris 100s linear infinite; /* Slow movement */
-    opacity: 0.7;
-    transform: scale(1);
-}
-  
-/* Variations for Colors */
-.debris.star {
-    width: 2px;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.8); /* Bright white stars */
-}
-  
-.debris.blue {
-    width: 3px;
-    height: 3px;
-    background: rgba(135, 206, 250, 0.7); /* Soft blue */
-}
-  
-.debris.yellow {
-    width: 4px;
-    height: 4px;
-    background: rgba(255, 255, 153, 0.8); /* Warm yellow */
-}
-  
-.debris.red {
-    width: 3px;
-    height: 3px;
-    background: rgba(255, 99, 71, 0.6); /* Faint red stars */
-}
-  
-.debris.purple {
-    width: 5px;
-    height: 5px;
-    background: rgba(186, 85, 211, 0.5); /* Nebula-like purple */
-    filter: blur(2px);
-}
-  
-  /* Milky Way Glow */
-.debris.milkyway {
-    width: 10px;
-    height: 10px;
-    background: rgba(255, 255, 255, 0.3);
-    filter: blur(8px);
-    opacity: 0.4;
-}
-  
-  /* Animations */
-@keyframes floatDebris {
-    0% {
-      transform: translate(0, 0) scale(1);
-    }
-    100% {
-      transform: translate(calc(-50vw + 100vw), calc(-50vh + 100vh)) scale(1.2);
-    }
-}
-  
-  /* Keyframes for Light Movement */
-  @keyframes moveLight {
-    0% {
-      top: 10%;
-      left: 70%;
-    }
-    100% {
-      top: 20%;
-      left: 80%;
-    }
 }
 
 /*==================== TOP MENU ====================*/
 .top-nav {
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for the element's width to truly center it */
     z-index: 100;
     display: flex;
+    justify-content: center; /* Ensure items are centered within the container */
     gap: 20px;
 }
 
@@ -173,9 +41,11 @@ body::-webkit-scrollbar-track {
 .social-nav {
     position: absolute;
     bottom: 20px;
-    right: 20px;
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for the element's width to truly center it */
     z-index: 100;
     display: flex;
+    justify-content: center; /* Ensure items are centered within the container */
     gap: 15px;
 }
 
@@ -193,25 +63,26 @@ body::-webkit-scrollbar-track {
 
 /****************************** MOBILE DESIGN ******************************/
 @media (max-width: 768px) {
-    
     .top-nav {
         top: 10px;
-        left: 10px;
-        gap: 10px;
+        left: 50%; /* Keep centered */
+        transform: translateX(-50%); /* Keep centered */
+        gap: 25px; /* Slightly reduce gap for mobile */
     }
     
     .top-nav a {
-        font-size: 1.2rem;
+        font-size: 1rem; /* Slightly smaller for mobile */
         gap: 5px;
     }
 
     .social-nav {
         bottom: 10px;
-        right: 10px;
-        gap: 10px;
+        left: 50%; /* Keep centered */
+        transform: translateX(-50%); /* Keep centered */
+        gap: 35px; /* Increase gap for easier clicking on mobile */
     }
 
     .social-nav a {
-        font-size: 1.2rem;
+        font-size: 1.5rem; /* Increase icon size for better visibility */
     }
 }

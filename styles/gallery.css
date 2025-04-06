@@ -70,54 +70,6 @@ body, html {
     linear-gradient(90deg, #ffffff,#ffffff);
 }
 
-/*==================== TOP MENU ====================*/
-.top-nav {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 100;
-    display: flex;
-    gap: 20px;
-}
-
-.top-nav a {
-    color: #ff004d;
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
-}
-
-.top-nav a:hover {
-    color: #ff66b3;
-}
-
-/*==================== CONTACT MENU ====================*/
-.social-nav {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 100;
-    display: flex;
-    gap: 15px;
-}
-
-.social-nav a {
-    color: #ff004d;
-    font-size: 1.5rem;
-    text-decoration: none;
-    text-shadow: 0 0 5px rgba(255, 0, 77, 0.5);
-    transition: color 0.3s ease;
-}
-
-.social-nav a:hover {
-    color: #ff66b3;
-}
-
 /*==================== GALLERY CONTENT ====================*/
 .gallery-content {
     position: relative;
@@ -238,27 +190,6 @@ body, html {
 
 /*==================== MOBILE DESIGN ====================*/
 @media (max-width: 768px) {
-    .top-nav {
-        top: 10px;
-        left: 10px;
-        gap: 10px;
-    }
-    
-    .top-nav a {
-        font-size: 1.2rem;
-        gap: 5px;
-    }
-
-    .social-nav {
-        bottom: 10px;
-        right: 10px;
-        gap: 10px;
-    }
-
-    .social-nav a {
-        font-size: 1.2rem;
-    }
-
     .carousel-container {
         max-width: 100%;
         padding: 0;
