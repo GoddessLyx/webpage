@@ -120,6 +120,10 @@ p {
 
 /****************************** MOBILE DESIGN ******************************/
 @media (max-width: 768px) {
+    .contact-content {
+        padding: 40px 20px;
+    }
+
     h1 {
         font-size: 1.8rem;
     }
