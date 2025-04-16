@@ -91,6 +91,30 @@
             to { transform: translate(-50%, -50%); opacity: 1; }
         }
 
+        .close-button {
+            display: none;
+            position: absolute;
+            top: 380px;
+            left: 20px;
+            width: 25px;
+            height: 25px;
+            background: #ff0000;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 25px;
+            text-align: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        .close-button:hover {
+            background: #cc0000;
+        }
+
         .heart, .shoe, .kiss {
             position: absolute;
             width: 50px;
@@ -184,6 +208,7 @@
         <p>Thank you for the beautiful feelings you bring into my life. I am yours, always.</p>
         <button class="gift-button" onclick="showGift()">Your Doggy</button>
         <img id="giftImage" class="gift-image" src="../images/dog.gif" alt="Gift for Lyx">
+        <button id="giftClose" class="close-button" onclick="hideGift()">X</button>
     </div>
     <div class="heart"></div>
     <div class="heart"></div>
@@ -206,6 +231,9 @@
             const confettiContainer = document.getElementById('confettiContainer');
             const isVisible = giftImage.style.display === 'block';
 
+            const giftClose = document.getElementById('giftClose');
+            const isCloseVisible = giftClose.style.display === 'block';
+
             if (!isVisible) {
                 giftImage.style.display = 'block';
                 // Add confetti elements dynamically
@@ -217,10 +245,16 @@
                     confettiContainer.appendChild(confetti);
                     // Remove confetti after animation
                     setTimeout(() => confetti.remove(), 6000);
+                    giftClose.style.display = 'block';
                 }
             } else {
                 giftImage.style.display = 'none';
+                giftClose.style.display = 'none';
             }
+        }
+        function hideGift() {
+            giftImage.style.display = 'none';
+            giftClose.style.display = 'none';
         }
     </script>
 </body>
