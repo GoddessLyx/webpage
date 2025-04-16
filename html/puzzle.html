@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goddess Lyx Puzzle Game</title>
+    <link rel="stylesheet" href="../styles/puzzle.css">
+</head>
+<body>
+    <div class="container">
+        <button class="start-button" id="startButton">Start Game</button>
+        <button class="mute-button" id="muteButton">🔊</button>
+        <div class="puzzle-board" id="puzzleBoard"></div>
+        <div class="popup" id="popup">
+            <h2>Hurray!</h2>
+            <p>Goddess Lyx: "Know your place dog! you will be always at my feet"</p>
+        </div>
+    </div>
+    <audio id="backgroundMusic" loop>
+        <source src="../musics/Mikky Eko.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <script>
+        const board = document.getElementById('puzzleBoard');
+        const popup = document.getElementById('popup');
+        const music = document.getElementById('backgroundMusic');
+        const startButton = document.getElementById('startButton');
+        const muteButton = document.getElementById('muteButton');
+        const imageUrl = '../images/30.png';
+        const gridSize = 3;
+        const pieces = [];
+        let emptySpace = { row: gridSize - 1, col: gridSize - 1 };
+        let gameStarted = false;
+        let isMuted = false;
+
+        function initPuzzle() {
+            const pieceWidth = board.offsetWidth / gridSize;
+            const pieceHeight = board.offsetHeight / gridSize;
+
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    if (row === gridSize - 1 && col === gridSize - 1) continue;
+                    const piece = document.createElement('div');
+                    piece.className = 'puzzle-piece';
+                    piece.dataset.correctRow = row;
+                    piece.dataset.correctCol = col;
+                    piece.style.backgroundImage = `url(${imageUrl})`;
+                    piece.style.backgroundPosition = `-${col * 100 / (gridSize - 1)}% -${row * 100 / (gridSize - 1)}%`;
+                    piece.style.width = `${pieceWidth}px`;
+                    piece.style.height = `${pieceHeight}px`;
+                    pieces.push(piece);
+                    board.appendChild(piece);
+                }
+            }
+
+            scramblePieces();
+
+            pieces.forEach(piece => {
+                piece.addEventListener('click', () => movePiece(piece));
+                piece.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    movePiece(piece);
+                }, { passive: false });
+            });
+        }
+
+        function scramblePieces() {
+            const pieceWidth = board.offsetWidth / gridSize;
+            const pieceHeight = board.offsetHeight / gridSize;
+            let grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
+            grid[gridSize - 1][gridSize - 1] = 'empty';
+
+            let index = 0;
+            for (let row = 0; row < gridSize; row++) {
+                for (let col = 0; col < gridSize; col++) {
+                    if (row === gridSize - 1 && col === gridSize - 1) continue;
+                    grid[row][col] = pieces[index];
+                    pieces[index].dataset.currentRow = row;
+                    pieces[index].dataset.currentCol = col;
+                    pieces[index].style.left = `${col * pieceWidth}px`;
+                    pieces[index].style.top = `${row * pieceHeight}px`;
+                    index++;
+                }
+            }
+
+            for (let i = 0; i < 100; i++) {
+                const neighbors = getValidMoves();
+                const move = neighbors[Math.floor(Math.random() * neighbors.length)];
+                swapPiece(move.row, move.col, false);
+            }
+
+            pieces.forEach(piece => {
+                const row = parseInt(piece.dataset.currentRow);
+                const col = parseInt(piece.dataset.currentCol);
+                piece.style.left = `${col * pieceWidth}px`;
+                piece.style.top = `${row * pieceHeight}px`;
+            });
+        }
+
+        function getValidMoves() {
+            const { row, col } = emptySpace;
+            const moves = [];
+            if (row > 0) moves.push({ row: row - 1, col });
+            if (row < gridSize - 1) moves.push({ row: row + 1, col });
+            if (col > 0) moves.push({ row, col: col - 1 });
+            if (col < gridSize - 1) moves.push({ row, col: col + 1 });
+            return moves;
+        }
+
+        function findPath(startRow, startCol, endRow, endCol) {
+            const queue = [{ row: startRow, col: startCol, path: [] }];
+            const visited = new Set([`${startRow},${startCol}`]);
+            const directions = [
+                { dr: -1, dc: 0 }, // Up
+                { dr: 1, dc: 0 },  // Down
+                { dr: 0, dc: -1 }, // Left
+                { dr: 0, dc: 1 }   // Right
+            ];
+
+            while (queue.length > 0) {
+                const { row, col, path } = queue.shift();
+                if (row === endRow && col === endCol) {
+                    return path;
+                }
+
+                for (const { dr, dc } of directions) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    const key = `${newRow},${newCol}`;
+                    if (
+                        newRow >= 0 && newRow < gridSize &&
+                        newCol >= 0 && newCol < gridSize &&
+                        !visited.has(key) &&
+                        (newRow === endRow && newCol === endCol || !isOccupied(newRow, newCol))
+                    ) {
+                        visited.add(key);
+                        queue.push({
+                            row: newRow,
+                            col: newCol,
+                            path: [...path, { row: newRow, col: newCol }]
+                        });
+                    }
+                }
+            }
+            return [];
+        }
+
+        function isOccupied(row, col) {
+            return pieces.some(piece => 
+                parseInt(piece.dataset.currentRow) === row && 
+                parseInt(piece.dataset.currentCol) === col
+            );
+        }
+
+        function movePiece(piece) {
+            if (!gameStarted) return;
+            const pieceRow = parseInt(piece.dataset.currentRow);
+            const pieceCol = parseInt(piece.dataset.currentCol);
+            const { row: emptyRow, col: emptyCol } = emptySpace;
+
+            // Check if piece is adjacent to empty space for immediate move
+            if (Math.abs(pieceRow - emptyRow) + Math.abs(pieceCol - emptyCol) === 1) {
+                swapPiece(pieceRow, pieceCol, true);
+                checkPuzzle();
+                return;
+            }
+
+            // Find path to empty space
+            const path = findPath(pieceRow, pieceCol, emptyRow, emptyCol);
+            if (path.length > 0) {
+                let delay = 0;
+                // Move piece step-by-step to each position in the path
+                for (let i = 0; i < path.length; i++) {
+                    setTimeout(() => {
+                        const prevRow = i === 0 ? pieceRow : path[i-1].row;
+                        const prevCol = i === 0 ? pieceCol : path[i-1].col;
+                        swapPiece(prevRow, prevCol, true);
+                        if (i === path.length - 1) {
+                            checkPuzzle();
+                        }
+                    }, delay);
+                    delay += 200; // Reduced delay for smoother animation
+                }
+            }
+        }
+
+        function swapPiece(pieceRow, pieceCol, animate) {
+            const pieceWidth = board.offsetWidth / gridSize;
+            const pieceHeight = board.offsetHeight / gridSize;
+            const { row: emptyRow, col: emptyCol } = emptySpace;
+
+            const piece = pieces.find(p => 
+                parseInt(p.dataset.currentRow) === pieceRow && 
+                parseInt(p.dataset.currentCol) === pieceCol
+            );
+            if (!piece) return;
+
+            if (animate) {
+                piece.classList.add('moving');
+                setTimeout(() => piece.classList.remove('moving'), 200);
+            }
+
+            piece.dataset.currentRow = emptyRow;
+            piece.dataset.currentCol = emptyCol;
+            piece.style.left = `${emptyCol * pieceWidth}px`;
+            piece.style.top = `${emptyRow * pieceHeight}px`;
+
+            emptySpace.row = pieceRow;
+            emptySpace.col = pieceCol;
+        }
+
+        function checkPuzzle() {
+            let isSolved = true;
+            pieces.forEach(piece => {
+                const currentRow = parseInt(piece.dataset.currentRow);
+                const currentCol = parseInt(piece.dataset.currentCol);
+                const correctRow = parseInt(piece.dataset.correctRow);
+                const correctCol = parseInt(piece.dataset.correctCol);
+                if (currentRow !== correctRow || currentCol !== correctCol) {
+                    isSolved = false;
+                }
+            });
+
+            if (isSolved) {
+                popup.style.display = 'block';
+                music.pause();
+            }
+        }
+
+        function startGame() {
+            gameStarted = true;
+            board.style.visibility = 'visible';
+            startButton.style.display = 'none';
+            if (!isMuted) {
+                music.play().then(() => {
+                    console.log('Music playback started');
+                }).catch(err => {
+                    console.error('Music playback failed:', err);
+                });
+            }
+        }
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            muteButton.textContent = isMuted ? '🔇' : '🔊';
+            if (isMuted) {
+                music.pause();
+            } else if (gameStarted) {
+                music.play();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            initPuzzle();
+            music.addEventListener('error', () => console.error('Failed to load music: ../musics/Mikky Eko.mp3'));
+            music.addEventListener('canplay', () => console.log('Music loaded successfully'));
+            startButton.addEventListener('click', startGame);
+            muteButton.addEventListener('click', toggleMute);
+        });
+
+        window.addEventListener('resize', () => {
+            const pieceWidth = board.offsetWidth / gridSize;
+            const pieceHeight = board.offsetHeight / gridSize;
+
+            pieces.forEach(piece => {
+                const row = parseInt(piece.dataset.currentRow);
+                const col = parseInt(piece.dataset.currentCol);
+                piece.style.width = `${pieceWidth}px`;
+                piece.style.height = `${pieceHeight}px`;
+                piece.style.left = `${col * pieceWidth}px`;
+                piece.style.top = `${row * pieceHeight}px`;
+            });
+        });
+    </script>
+</body>
+</html>

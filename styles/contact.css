@@ -110,14 +110,6 @@ p {
     color: #fff;
 }
 
-/* Remove old background animations */
-@keyframes cosmic-swirl,
-@keyframes move-random,
-@keyframes move-random-alt,
-@keyframes move-slow {
-    /* Remove these animations */
-}
-
 /****************************** MOBILE DESIGN ******************************/
 @media (max-width: 768px) {
     .contact-content {
