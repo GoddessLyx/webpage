@@ -150,7 +150,7 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: #ff00ff;
+    background: #ff00ff16;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 30px #800080, 0 0 50px #ff00ff;
