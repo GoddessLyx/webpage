@@ -8,289 +8,81 @@
 </head>
 <body>
     <div class="container">
-        <button class="start-button" id="startButton">Start Game</button>
-        <button class="mute-button" id="muteButton">🔊</button>
-        <div class="puzzle-board" id="puzzleBoard"></div>
-        <div class="popup" id="popup">
-            <h2>Hurray!</h2>
-            <p>Goddess Lyx: "Know your place dog! you will be always at my feet"</p>
+        <div class="menu" id="menuOptions">
+            <div class="pieces-options">
+                <button class="pieces-option" data-pieces="9">9 Pieces</button>
+                <button class="pieces-option" data-pieces="12">12 Pieces</button>
+                <button class="pieces-option" data-pieces="25">25 Pieces</button>
+                <button class="pieces-option" data-pieces="50">50 Pieces</button>
+                <button class="pieces-option" data-pieces="100">100 Pieces</button>
+                <button class="pieces-option" data-pieces="200">200 Pieces</button>
+            </div>
         </div>
+        <button class="start-button" id="startButton" disabled>Start Game</button>
+        <button class="mute-button" id="muteButton">🔊</button>
+        <div class="timer" id="timer">00:00</div>
+        <div id="forPuzzle"></div>
+        <!-- Minimal menu structure to satisfy puzzle.js -->
+        <ul id="menu">
+            <li>☰</li>
+            <li>default image</li>
+            <li>load image</li>
+            <li><select id="shape"><option value="1" selected>classic</option></select></li>
+            <li>9 pieces</li>
+            <li>12 pieces</li>
+            <li>25 pieces</li>
+            <li>50 pieces</li>
+            <li>100 pieces</li>
+            <li>200 pieces</li>
+        </ul>
     </div>
     <audio id="backgroundMusic" loop>
         <source src="../musics/Mikky Eko.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
     <script>
-        const board = document.getElementById('puzzleBoard');
-        const popup = document.getElementById('popup');
         const music = document.getElementById('backgroundMusic');
         const startButton = document.getElementById('startButton');
         const muteButton = document.getElementById('muteButton');
-        const imageUrl = '../images/30.png';
-        const gridSize = 3;
-        const pieces = [];
-        let emptySpace = { row: 1, col: 1 }; // Center position is the empty space
-        let gameStarted = false;
+        const timerDisplay = document.getElementById('timer');
+        const piecesOptions = document.querySelectorAll('.pieces-option');
+        const puzzleContainer = document.getElementById('forPuzzle');
+        const menuOptions = document.getElementById('menuOptions');
         let isMuted = false;
-
-        function initPuzzle() {
-            const pieceWidth = board.offsetWidth / gridSize;
-            const pieceHeight = board.offsetHeight / gridSize;
-
-            // Define the correct positions for each piece based on the image part it represents
-            const piecePositions = [
-                { row: 0, col: 0 }, // Top-left
-                { row: 0, col: 1 }, // Top-center
-                { row: 0, col: 2 }, // Top-right
-                { row: 1, col: 0 }, // Middle-left
-                { row: 1, col: 2 }, // Middle-right
-                { row: 2, col: 0 }, // Bottom-left
-                { row: 2, col: 1 }, // Bottom-center
-                { row: 2, col: 2 }  // Bottom-right
-            ];
-
-            piecePositions.forEach(({ row, col }) => {
-                const piece = document.createElement('div');
-                piece.className = 'puzzle-piece';
-                piece.dataset.correctRow = row.toString();
-                piece.dataset.correctCol = col.toString();
-                piece.style.backgroundImage = `url(${imageUrl})`;
-                piece.style.backgroundPosition = `-${col * 100 / (gridSize - 1)}% -${row * 100 / (gridSize - 1)}%`;
-                piece.style.width = `${pieceWidth}px`;
-                piece.style.height = `${pieceHeight}px`;
-                pieces.push(piece);
-                board.appendChild(piece);
+        let gameStarted = false;
+        let timerInterval = null;
+        let seconds = 0;
+        let selectedPieces = null;
+        let hurrayDisplayed = false; // Flag to prevent multiple hurray messages within a game
+        let gameActive = false; // Flag to track if a game is actively in progress
+    
+        function checkStartButton() {
+            if (selectedPieces) {
+                startButton.disabled = false;
+                startButton.classList.add('enabled');
+            } else {
+                startButton.disabled = true;
+                startButton.classList.remove('enabled');
+            }
+        }
+    
+        piecesOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                piecesOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedPieces = parseInt(option.dataset.pieces);
+                checkStartButton();
             });
-
-            scramblePieces();
-
-            pieces.forEach(piece => {
-                piece.addEventListener('click', () => movePiece(piece));
-                piece.addEventListener('touchstart', (e) => {
-                    e.preventDefault();
-                    movePiece(piece);
-                }, { passive: false });
-            });
-        }
-
-        function scramblePieces() {
-            const pieceWidth = board.offsetWidth / gridSize;
-            const pieceHeight = board.offsetHeight / gridSize;
-            let grid = Array(gridSize).fill().map(() => Array(gridSize).fill(null));
-            grid[1][1] = 'empty'; // Center position is empty
-
-            let availablePositions = [
-                { row: 0, col: 0 }, { row: 0, col: 1 }, { row: 0, col: 2 },
-                { row: 1, col: 0 }, { row: 1, col: 2 },
-                { row: 2, col: 0 }, { row: 2, col: 1 }, { row: 2, col: 2 }
-            ];
-
-            // Shuffle the available positions
-            for (let i = availablePositions.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [availablePositions[i], availablePositions[j]] = [availablePositions[j], availablePositions[i]];
-            }
-
-            // Assign each piece to a random position
-            pieces.forEach((piece, index) => {
-                const { row, col } = availablePositions[index];
-                piece.dataset.currentRow = row.toString();
-                piece.dataset.currentCol = col.toString();
-                piece.style.left = `${col * pieceWidth}px`;
-                piece.style.top = `${row * pieceHeight}px`;
-                grid[row][col] = piece;
-            });
-
-            // Additional scrambling by moving pieces
-            for (let i = 0; i < 100; i++) {
-                const neighbors = getValidMoves();
-                const move = neighbors[Math.floor(Math.random() * neighbors.length)];
-                swapPiece(move.row, move.col, false);
-            }
-        }
-
-        function getValidMoves() {
-            const { row, col } = emptySpace;
-            const moves = [];
-            if (row > 0) moves.push({ row: row - 1, col });
-            if (row < gridSize - 1) moves.push({ row: row + 1, col });
-            if (col > 0) moves.push({ row, col: col - 1 });
-            if (col < gridSize - 1) moves.push({ row, col: col + 1 });
-            return moves;
-        }
-
-        function findPath(startRow, startCol, endRow, endCol) {
-            const queue = [{ row: startRow, col: startCol, path: [] }];
-            const visited = new Set([`${startRow},${startCol}`]);
-            const directions = [
-                { dr: -1, dc: 0 }, // Up
-                { dr: 1, dc: 0 },  // Down
-                { dr: 0, dc: -1 }, // Left
-                { dr: 0, dc: 1 }   // Right
-            ];
-
-            while (queue.length > 0) {
-                const { row, col, path } = queue.shift();
-                if (row === endRow && col === endCol) {
-                    return path;
-                }
-
-                for (const { dr, dc } of directions) {
-                    const newRow = row + dr;
-                    const newCol = col + dc;
-                    const key = `${newRow},${newCol}`;
-                    if (
-                        newRow >= 0 && newRow < gridSize &&
-                        newCol >= 0 && newCol < gridSize &&
-                        !visited.has(key) &&
-                        (newRow === endRow && newCol === endCol || !isOccupied(newRow, newCol))
-                    ) {
-                        visited.add(key);
-                        queue.push({
-                            row: newRow,
-                            col: newCol,
-                            path: [...path, { row: newRow, col: newCol }]
-                        });
-                    }
-                }
-            }
-            return [];
-        }
-
-        function isOccupied(row, col) {
-            return pieces.some(piece => 
-                parseInt(piece.dataset.currentRow) === row && 
-                parseInt(piece.dataset.currentCol) === col
-            );
-        }
-
-        function movePiece(piece) {
-            if (!gameStarted) return;
-            const pieceRow = parseInt(piece.dataset.currentRow);
-            const pieceCol = parseInt(piece.dataset.currentCol);
-            const { row: emptyRow, col: emptyCol } = emptySpace;
-
-            if (Math.abs(pieceRow - emptyRow) + Math.abs(pieceCol - emptyCol) === 1) {
-                swapPiece(pieceRow, pieceCol, true);
-                checkPuzzle();
-                return;
-            }
-
-            const path = findPath(pieceRow, pieceCol, emptyRow, emptyCol);
-            if (path.length > 0) {
-                let delay = 0;
-                for (let i = 0; i < path.length; i++) {
-                    setTimeout(() => {
-                        const prevRow = i === 0 ? pieceRow : path[i-1].row;
-                        const prevCol = i === 0 ? pieceCol : path[i-1].col;
-                        swapPiece(prevRow, prevCol, true);
-                        if (i === path.length - 1) {
-                            checkPuzzle();
-                        }
-                    }, delay);
-                    delay += 200;
-                }
-            }
-        }
-
-        function swapPiece(pieceRow, pieceCol, animate) {
-            const pieceWidth = board.offsetWidth / gridSize;
-            const pieceHeight = board.offsetHeight / gridSize;
-            const { row: emptyRow, col: emptyCol } = emptySpace;
-
-            const piece = pieces.find(p => 
-                parseInt(p.dataset.currentRow) === pieceRow && 
-                parseInt(p.dataset.currentCol) === pieceCol
-            );
-            if (!piece) return;
-
-            if (animate) {
-                piece.classList.add('moving');
-                setTimeout(() => piece.classList.remove('moving'), 200);
-            }
-
-            piece.dataset.currentRow = emptyRow.toString();
-            piece.dataset.currentCol = emptyCol.toString();
-            piece.style.left = `${emptyCol * pieceWidth}px`;
-            piece.style.top = `${emptyRow * pieceHeight}px`;
-
-            emptySpace.row = pieceRow;
-            emptySpace.col = pieceCol;
-        }
-
-        function checkPuzzle() {
-            let correctPieces = 0;
-            pieces.forEach((piece, index) => {
-                const currentRow = parseInt(piece.dataset.currentRow);
-                const currentCol = parseInt(piece.dataset.currentCol);
-                const correctRow = parseInt(piece.dataset.correctRow);
-                const correctCol = parseInt(piece.dataset.correctCol);
-                console.log(`Piece ${index}: Current (${currentRow}, ${currentCol}), Correct (${correctRow}, ${correctCol})`);
-                if (currentRow === correctRow && currentCol === correctCol) {
-                    correctPieces++;
-                }
-            });
-
-            console.log(`Correct pieces: ${correctPieces}, Empty space: (${emptySpace.row}, ${emptySpace.col})`);
-
-            if (correctPieces === 8) {
-                // Ensure empty space is in the center by moving the piece at (1,1) if necessary
-                if (emptySpace.row !== 2|| emptySpace.col !== 2) {
-                    const pieceAtCenter = pieces.find(p => 
-                        parseInt(p.dataset.currentRow) === 1 && 
-                        parseInt(p.dataset.currentCol) === 1
-                    );
-                    if (pieceAtCenter) {
-                        const path = findPath(1, 1, emptySpace.row, emptySpace.col);
-                        if (path.length > 0) {
-                            let delay = 0;
-                            for (let i = 0; i < path.length; i++) {
-                                setTimeout(() => {
-                                    const prevRow = i === 0 ? 1 : path[i-1].row;
-                                    const prevCol = i === 0 ? 1 : path[i-1].col;
-                                    swapPiece(prevRow, prevCol, true);
-                                    if (i === path.length - 1) {
-                                        finalizePuzzle();
-                                    }
-                                }, delay);
-                                delay += 200;
-                            }
-                            return; // Exit to wait for the move to complete
-                        }
-                    }
-                }
-                finalizePuzzle();
-            }
-        }
-
-        function finalizePuzzle() {
-            console.log("Puzzle solved! Adding final piece and showing popup.");
-            const finalPiece = document.createElement('div');
-            finalPiece.className = 'puzzle-piece';
-            finalPiece.dataset.correctRow = '2';
-            finalPiece.dataset.correctCol = '2';
-            finalPiece.dataset.currentRow = '2';
-            finalPiece.dataset.currentCol = '2';
-            finalPiece.style.backgroundImage = `url(${imageUrl})`;
-            finalPiece.style.backgroundPosition = `-${1 * 100 / (gridSize - 1)}% -${1 * 100 / (gridSize - 1)}%`;
-            finalPiece.style.width = `${board.offsetWidth / gridSize}px`;
-            finalPiece.style.height = `${board.offsetHeight / gridSize}px`;
-            finalPiece.style.left = `${1 * (board.offsetWidth / gridSize)}px`;
-            finalPiece.style.top = `${1 * (board.offsetHeight / gridSize)}px`;
-            board.appendChild(finalPiece);
-
-            gameStarted = false;
-
-            setTimeout(() => {
-                popup.style.display = 'block';
-                music.pause();
-            }, 500);
-        }
-
+        });
+    
         function startGame() {
             gameStarted = true;
-            board.style.visibility = 'visible';
+            gameActive = true; // Mark game as active
+            hurrayDisplayed = false;
             startButton.style.display = 'none';
+            menuOptions.classList.add('hidden');
+            puzzleContainer.classList.add('active');
+            startTimer();
             if (!isMuted) {
                 music.play().then(() => {
                     console.log('Music playback started');
@@ -298,8 +90,27 @@
                     console.error('Music playback failed:', err);
                 });
             }
+            events.push({ event: "nbpieces", nbpieces: selectedPieces });
         }
-
+    
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                seconds++;
+                const minutes = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+    
+        function stopTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+            seconds = 0;
+            timerDisplay.textContent = '00:00';
+        }
+    
         function toggleMute() {
             isMuted = !isMuted;
             muteButton.textContent = isMuted ? '🔇' : '🔊';
@@ -309,28 +120,96 @@
                 music.play();
             }
         }
-
+    
+        function showHurrayMessage() {
+            if (hurrayDisplayed || !gameActive) return;
+            hurrayDisplayed = true;
+            console.log('Puzzle completed! Showing hurray message.');
+    
+            // Create hurray message
+            const message = document.createElement('div');
+            message.className = 'hurray-message';
+            message.innerHTML = "Good job! You've proven your worth, loyal doggy.<br>Yet, you'll forever remain beneath my glorious feet!";
+            document.body.appendChild(message);
+    
+            // Create celebration container
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            document.body.appendChild(celebration);
+    
+            // Add balloons
+            for (let i = 0; i < 10; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = `${Math.random() * 100}%`;
+                balloon.style.animationDelay = `${Math.random() * 2}s`;
+                balloon.style.background = `radial-gradient(circle at 30% 30%, #fff 10%, hsl(${Math.random() * 360}, 70%, 50%) 70%)`;
+                celebration.appendChild(balloon);
+            }
+    
+            // Add confetti
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = `${Math.random() * 100}%`;
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.style.background = `hsl(${Math.random() * 360}, 70%, 50%)`;
+                celebration.appendChild(confetti);
+            }
+    
+            // Reset after 5 seconds
+            setTimeout(() => {
+                message.remove();
+                celebration.remove();
+                resetGame();
+            }, 5000);
+        }
+    
+        function resetGame() {
+            gameStarted = false;
+            gameActive = false; // Mark game as inactive
+            hurrayDisplayed = false;
+            stopTimer();
+            puzzleContainer.classList.remove('active');
+            puzzleContainer.innerHTML = ''; // Clear puzzle pieces
+            menuOptions.classList.remove('hidden');
+            startButton.textContent = 'Start Over';
+            startButton.style.display = 'block';
+            startButton.disabled = true;
+            startButton.classList.remove('enabled');
+            selectedPieces = null;
+            piecesOptions.forEach(opt => opt.classList.remove('selected'));
+            // Fully reset puzzle state
+            events.push({ event: "reset" });
+            // Clear polyPieces to prevent re-triggering
+            if (typeof puzzle !== 'undefined' && puzzle.polyPieces) {
+                puzzle.polyPieces = [];
+            }
+        }
+    
         window.addEventListener('load', () => {
-            initPuzzle();
             music.addEventListener('error', () => console.error('Failed to load music: ../musics/Mikky Eko.mp3'));
             music.addEventListener('canplay', () => console.log('Music loaded successfully'));
             startButton.addEventListener('click', startGame);
             muteButton.addEventListener('click', toggleMute);
-        });
-
-        window.addEventListener('resize', () => {
-            const pieceWidth = board.offsetWidth / gridSize;
-            const pieceHeight = board.offsetHeight / gridSize;
-
-            pieces.forEach(piece => {
-                const row = parseInt(piece.dataset.currentRow);
-                const col = parseInt(piece.dataset.currentCol);
-                piece.style.width = `${pieceWidth}px`;
-                piece.style.height = `${pieceHeight}px`;
-                piece.style.left = `${col * pieceWidth}px`;
-                piece.style.top = `${row * pieceHeight}px`;
-            });
+    
+            // Override the animate function to detect puzzle completion
+            if (typeof animate !== 'undefined') {
+                const originalAnimate = animate;
+    
+                animate = function () {
+                    originalAnimate();
+    
+                    // Check for puzzle completion only if game is active
+                    if (gameActive && typeof puzzle !== 'undefined' && puzzle.polyPieces && puzzle.polyPieces.length === 1 && !hurrayDisplayed) {
+                        showHurrayMessage();
+                    }
+                };
+            } else {
+                console.error('animate function not found. Ensure puzzle.js is loaded correctly.');
+            }
         });
     </script>
+    <script src="../scripts/puzzle.js"></script>
 </body>
 </html>
