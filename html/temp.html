@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Goddess Tania</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      min-height: 100vh;
+      overflow: hidden;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Heart Animation */
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 105, 180, 0.7);
+      transform: rotate(45deg);
+      animation: float 10s infinite ease-in-out;
+      pointer-events: none;
+    }
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255, 105, 180, 0.7);
+      border-radius: 50%;
+    }
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+    .heart::after {
+      left: 10px;
+      top: 0;
+    }
+
+    /* Randomize heart positions and animation delays */
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+    .heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+    .heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+    .heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+    .heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .heart:nth-child(7) { left: 70%; animation-delay: 6s; }
+    .heart:nth-child(8) { left: 80%; animation-delay: 7s; }
+    .heart:nth-child(9) { left: 90%; animation-delay: 8s; }
+
+    @keyframes float {
+      0% {
+        transform: rotate(45deg) translateY(100vh) translateX(0);
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(45deg) translateY(-100vh) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Shiny Text */
+    .shiny-text {
+      font-family: 'Playfair Display', serif;
+      color: #ffd700;
+      text-shadow: 0 0 10px #ffd700, 0 0 20px #ff69b4, 0 0 30px #ff1493;
+      animation: pulse 2s infinite ease-in-out;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 90%;
+      position: relative;
+      z-index: 10;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body class="flex items-center justify-center">
+  <!-- Hearts -->
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+  <div class="heart"></div>
+
+  <!-- Centered Text -->
+  <div class="shiny-text text-3xl md:text-5xl text-center">
+    Para mi Diosa Tania:<br>
+    Este apagón me enseñó a valorar los dones divinos que recibimos cada día.<br> Con todo mi corazón, le agradezco, mi Reina, mi alma y joya radiante enviada por Dios.<br> Estaré siempre a sus pies, fiel y devoto como un perrito guardián leal.
+  </div>
+</body>
+</html>
