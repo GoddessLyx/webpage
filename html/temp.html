@@ -1,102 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Un Regalo para Mi Diosa Tania</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            /* Replace the URL below with your image URL or file path */
-            background-image: url('../images/dirty.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            overflow: hidden;
-            font-family: 'Arial', sans-serif;
-            position: relative;
-        }
-        .heart {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff6f91;
-            transform: rotate(45deg);
-            animation: fall 5s linear infinite;
-            z-index: 2; /* Hearts above the overlay */
-        }
-        .heart::before,
-        .heart::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff6f91;
-            border-radius: 50%;
-        }
-        .heart::before {
-            top: -10px;
-            left: 0;
-        }
-        .heart::after {
-            top: 0;
-            left: -10px;
-        }
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(45deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(45deg);
-                opacity: 0;
-            }
-        }
-        .message-container {
-            background: rgba(255, 255, 255, 0.95); /* More opaque for readability */
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            max-width: 600px;
-            text-align: center;
-            animation: fadeIn 2s ease-in-out;
-            position: relative;
-            z-index: 2; /* Message above the overlay */
-        }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        /****************************** MOBILE DESIGN ******************************/
-        @media (max-width: 768px) {
-          .message-container {
-            width: 90%;
-          }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Mi Diosa Tania</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f5e1ee, #d8b2ff, #b2d8ff);
+      background-image: url('../images/constipada.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      font-family: 'Georgia', serif;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/floral-pattern.png');
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 700px;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.507);
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      position: relative;
+      border: 2px solid #ffcccb;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #c71585;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+      margin-bottom: 25px;
+      font-family: 'Great Vibes', cursive;
+    }
+
+    p {
+      font-size: 1.3em;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    .heart {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      background: #ff4d94;
+      transform: rotate(45deg);
+      animation: float 5s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 25px;
+      height: 25px;
+      background: #ff4d94;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    .heart::before {
+      top: -12.5px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: 12.5px;
+      top: 0;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      animation: sparkle 4s infinite ease-in-out;
+      z-index: 5;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+      50% {
+        transform: scale(1.5);
+        opacity: 0.3;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2em;
+      }
+      p {
+        font-size: 1em;
+      }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 </head>
-<body class="flex items-center justify-center min-h-screen">
-    <!-- Message Container -->
-    <div class="message-container">
-        <h1 class="text-4xl font-bold text-pink-600 mb-4">Para Mi Diosa Tania 💖</h1>
-        <p class="text-lg text-gray-800 leading-relaxed">
-            Mi Tania adorada, usted es un ángel que ilumina mi mundo con su magia ✨.</br>Cada día con usted es un regalo del cielo, y aunque estemos lejos, mi corazón late por usted en cada momento 🥰. </br>Usted es mi diosa preciosa, mi inspiración, y le agradezco por ser tan perfecta y llenar mi vida de amor 💕. </br>Quiero estar siempre a sus pies, mi reina 🌟. ¡Le amo con todo mi ser, mi Disoa Tania hermosa! 😘💖🐾
-        </p>
-    </div>
+<body>
+  <div class="container">
+    <h1>Para Mi Diosa Tania Hermosa</h1>
+    <p>
+      Mi diosa, hoy ha despertado constipada y el corazón de su perrito siente su dolor. Su salud es lo primero para mi. Si un día se siente cansada, resfriada, o con cualquier cosa aunque sea pequeña, para mi también es muy doloroso. Espero que siempre esté feliz y con mucha salud. Está a sus pies, mi vida, siempre atento para cualquier ayuda. Un beso a los suelos de sus pies, mi Diosa Tania.
+    </p>
+  </div>
 
-    <!-- JavaScript for Falling Hearts -->
-    <script>
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }
+  <script>
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+      document.body.appendChild(heart);
 
-        setInterval(createHeart, 300);
-    </script>
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    function createSparkle() {
+      const sparkle = document.createElement('div');
+      sparkle.className = 'sparkle';
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      sparkle.style.animationDuration = Math.random() * 2 + 2 + 's';
+      document.body.appendChild(sparkle);
+
+      setTimeout(() => {
+        sparkle.remove();
+      }, 4000);
+    }
+
+    setInterval(createHeart, 400);
+    setInterval(createSparkle, 600);
+  </script>
 </body>
 </html>
