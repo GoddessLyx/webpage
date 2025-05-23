@@ -2,15 +2,16 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Para Mi Diosa Tania</title>
     <style>
         body {
             margin: 0;
-            overflow: hidden;
+            overflow-x: hidden;
+            overflow-y: auto;
             background: url('../images/beach.png') no-repeat center center fixed;
             background-size: cover;
-            height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,6 +26,7 @@
             text-align: center;
             color: #333;
             z-index: 10;
+            box-sizing: border-box;
         }
 
         .text-container h1 {
@@ -55,6 +57,35 @@
                 opacity: 0;
             }
         }
+
+        @media screen and (max-width: 600px) {
+            .text-container {
+                padding: 15px;
+            }
+
+            .text-container h1 {
+                font-size: 1.8em;
+            }
+
+            .text-container p {
+                font-size: 1em;
+            }
+
+            .flying-object {
+                font-size: 1.5em;
+            }
+
+            @keyframes float {
+                0% {
+                    transform: translateY(100dvh) rotate(0deg);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-50px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        }
     </style>
 </head>
 <body>
@@ -71,7 +102,7 @@
             const object = document.createElement('div');
             object.className = 'flying-object';
             object.textContent = objects[Math.floor(Math.random() * objects.length)];
-            object.style.left = Math.random() * window.innerWidth + 'px';
+            object.style.left = Math.random() * (window.innerWidth - 30) + 'px';
             object.style.animation = `float ${5 + Math.random() * 5}s linear`;
             document.body.appendChild(object);
 
