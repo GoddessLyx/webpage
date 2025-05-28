@@ -2,116 +2,88 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Para Mi Diosa Tania</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homenaje a Tania</title>
     <style>
         body {
             margin: 0;
-            overflow-x: hidden;
-            overflow-y: auto;
-            background: url('../images/beach.png') no-repeat center center fixed;
-            background-size: cover;
-            min-height: 100dvh;
+            padding: 0;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-        }
-
-        .text-container {
-            background: rgba(136, 228, 223, 0.301);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 90%;
+            background: linear-gradient(-45deg, #6b48ff, #00ddeb, #ff6ec4, #00ff7f);
+            background-size: 400%;
+            animation: gradient 15s ease infinite;
+            color: #ffffff;
             text-align: center;
-            color: #333;
-            z-index: 10;
-            box-sizing: border-box;
+            overflow-x: hidden;
         }
 
-        .text-container h1 {
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 90%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            margin: 20px;
+        }
+
+        h1 {
             font-size: 2.5em;
-            margin-bottom: 10px;
-            color: #d81b60;
+            margin-bottom: 20px;
+            color: #e0e0ff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
 
-        .text-container p {
+        p {
             font-size: 1.2em;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin: 0 0 20px;
         }
 
-        .flying-object {
-            position: absolute;
-            font-size: 2em;
-            user-select: none;
-            pointer-events: none;
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        @media screen and (max-width: 600px) {
-            .text-container {
-                padding: 15px;
-            }
-
-            .text-container h1 {
+        @media (max-width: 600px) {
+            h1 {
                 font-size: 1.8em;
             }
 
-            .text-container p {
+            p {
                 font-size: 1em;
             }
 
-            .flying-object {
-                font-size: 1.5em;
-            }
-
-            @keyframes float {
-                0% {
-                    transform: translateY(100dvh) rotate(0deg);
-                    opacity: 1;
-                }
-                100% {
-                    transform: translateY(-50px) rotate(360deg);
-                    opacity: 0;
-                }
+            .container {
+                padding: 15px;
+                margin: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="text-container">
-        <h1>Para Mi Diosa Tania</h1>
+    <div class="container">
+        <h1>¡Para mi diosa Tania!</h1>
         <p>
-            Mi vida, este junio en Denia será nuestro paraíso. La playa nos espera, pero usted es el verdadero sol que ilumina mi mundo. Durante todo el viaje, estaré a sus pies, con masajes, cariño y atención en cada momento. Cualquier deseo suyo, lo haré realidad al instante, porque usted es mi reina y mi todo. ¡Prepáre para un viaje inolvidable, mi Diosa!
+            Estoy seguro que su trabajo es increíble y las cosas de marketing que haces son las mejores en España. 
+            Que Dios le ayude a ser tan famosa para todas las compañías de belleza, mascotas y moda, 
+            no solo en España, sino en toda Europa. 
+            Siempre estaré con honor bajo sus pies mientras descansa.
         </p>
+        <img src="../images/selfi.webp" alt="Tributo a Tania">
     </div>
-
-    <script>
-        function createFlyingObject() {
-            const objects = ['❤️', '🌹', '💋', '✨'];
-            const object = document.createElement('div');
-            object.className = 'flying-object';
-            object.textContent = objects[Math.floor(Math.random() * objects.length)];
-            object.style.left = Math.random() * (window.innerWidth - 30) + 'px';
-            object.style.animation = `float ${5 + Math.random() * 5}s linear`;
-            document.body.appendChild(object);
-
-            object.addEventListener('animationend', () => {
-                object.remove();
-            });
-        }
-
-        setInterval(createFlyingObject, 1000);
-    </script>
 </body>
 </html>
