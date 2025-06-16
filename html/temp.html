@@ -1,89 +1,234 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homenaje a Tania</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(-45deg, #6b48ff, #00ddeb, #ff6ec4, #00ff7f);
-            background-size: 400%;
-            animation: gradient 15s ease infinite;
-            color: #ffffff;
-            text-align: center;
-            overflow-x: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Mi Diosa Tania y Su Rey</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      color: #fff;
+      background-color: rgb(102, 102, 4);
+      background-image:
+        radial-gradient(midnightblue 9px, transparent 10px),
+        repeating-radial-gradient(midnightblue 0, midnightblue 4px, transparent 5px, transparent 20px, midnightblue 21px, midnightblue 25px, transparent 26px, transparent 50px);
+      background-size: 30px 30px, 90px 90px;
+      background-position: 0 0;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    .container {
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px;
+      text-align: center;
+    }
 
-        .container {
-            max-width: 90%;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-            margin: 20px;
-        }
+    .agradecimiento {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+      animation: fadeIn 2s ease-in;
+    }
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #e0e0ff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
+    .agradecimiento h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            margin: 0 0 20px;
-        }
+    .agradecimiento p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
 
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
+    .open-button {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
+      background-size: 300% 300%;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      animation: glow 4s ease infinite, fadeIn 3s ease-in-out;
+      transition: transform 0.3s;
+    }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 1.8em;
-            }
+    .open-button:hover {
+      transform: scale(1.05);
+    }
 
-            p {
-                font-size: 1em;
-            }
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-            .container {
-                padding: 15px;
-                margin: 10px;
-            }
-        }
-    </style>
+    .magic-box {
+      margin-top: 50px;
+      display: none;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .magic-box h2 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #fff;
+    }
+
+    .cages {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .cage {
+      background: rgba(255, 255, 255, 0.06);
+      border: 2px dashed #fff;
+      border-radius: 15px;
+      padding: 25px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+      font-size: 1.1em;
+      position: relative;
+    }
+
+    .cage::before {
+      content: "🕊️";
+      font-size: 2em;
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cage:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff69b4;
+    }
+
+    .destination {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: 3;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .destination-content {
+      background: rgba(0, 0, 0, 0.322);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 80%;
+    }
+
+    .destination h3 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .destination p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .destination button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1em;
+      background: #ff69b4;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .destination button:hover {
+      background: #ff1493;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .agradecimiento h1 { font-size: 2em; }
+      .magic-box h2 { font-size: 1.5em; }
+      .cage { font-size: 1em; }
+      .destination-content { padding: 20px; }
+      .open-button { font-size: 1em; padding: 12px 24px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¡Para mi diosa Tania!</h1>
-        <p>
-            Estoy seguro que su trabajo es increíble y las cosas de marketing que haces son las mejores en España. 
-            Que Dios le ayude a ser tan famosa para todas las compañías de belleza, mascotas y moda, 
-            no solo en España, sino en toda Europa. 
-            Siempre estaré con honor bajo sus pies mientras descansa.
-        </p>
-        <img src="../images/selfi.webp" alt="Tributo a Tania">
+  <div class="container">
+    <div class="agradecimiento">
+      <h1>A Mi Diosa Tania y Rey Alex</h1>
+      <p>Mi reina, el viaje a Denia ha sido un sueño del que no deseo despertar. Cada momento bajo sus pies, sirviéndote con devoción, ha sido un regalo divino. Su risa, su presencia, y la paz que me da al ser su chucho fiel han grabado en mi corazón memorias eternas. Miles gracias, mi diosa, por permitirme acompañarles y cuidar de usted y su amor. Ustes son mi paraíso, mi luz, y mi razón para soñar. 🥹🐶💖</p>
+      <p>Con todo mi amor y respeto, le dedico esta página, 3 cofres mágicos para planear nuestra próxima aventura. ¿A dónde nos llevará el destino, mi vida?</p>
+      <button class="open-button" onclick="document.querySelector('.magic-box').style.display='block'; this.style.display='none';">✨ Abrir Cofres ✨</button>
     </div>
+
+    <div class="magic-box">
+      <h2>El Cofre Mágico de Nuestra Próxima Aventura</h2>
+      <div class="cages">
+        <div class="cage" onclick="showDestination('Playa de Maro y Cala del Cañuelo', '../images/cala.png', 'Solo a 5 horas de Madrid, aguas cristalinas rodeadas de acantilados verdes y tranquilidad total.')">
+          Cofre 1: Maro
+        </div>
+        <div class="cage" onclick="showDestination('Playa de Cabopino y Nagüeles', '../images/Cabopino.png', 'Playas amplias con arena dorada en Marbella. A solo 6 horas en coche desde Madrid, ideal para un viaje con glamour.')">
+          Cofre 2: Marbella
+        </div>
+        <div class="cage" onclick="showDestination('Playa de los Muertos y Cabo de Gata', '../images/muertos.png', 'Una joya salvaje en Almería. Aguas turquesas, paisajes volcánicos y un toque de aventura.')">
+          Cofre 3: Almería
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="destination" id="destination">
+    <div class="destination-content">
+      <h3 id="destination-name"></h3>
+      <p id="destination-text"></p>
+      <button onclick="hideDestination()">Cerrar</button>
+    </div>
+  </div>
+
+  <script>
+    function showDestination(name, image, text) {
+      const destination = document.getElementById('destination');
+      const destinationName = document.getElementById('destination-name');
+      const destinationText = document.getElementById('destination-text');
+      destination.style.backgroundImage = `url(${image})`;
+      destinationName.textContent = name;
+      destinationText.textContent = `${text} Mis reinos ¿permitirían a su chucho fiel acompañarles a una nueva aventura? 🩷🌊🐶`;
+      destination.style.display = 'flex';
+    }
+
+    function hideDestination() {
+      document.getElementById('destination').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
