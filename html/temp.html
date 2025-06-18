@@ -1,234 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para Mi Diosa Tania y Su Rey</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      color: #fff;
-      background-color: rgb(102, 102, 4);
-      background-image:
-        radial-gradient(midnightblue 9px, transparent 10px),
-        repeating-radial-gradient(midnightblue 0, midnightblue 4px, transparent 5px, transparent 20px, midnightblue 21px, midnightblue 25px, transparent 26px, transparent 50px);
-      background-size: 30px 30px, 90px 90px;
-      background-position: 0 0;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      padding: 40px 20px;
-      text-align: center;
-    }
-
-    .agradecimiento {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.5);
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-      animation: fadeIn 2s ease-in;
-    }
-
-    .agradecimiento h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-
-    .agradecimiento p {
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    .open-button {
-      margin-top: 30px;
-      padding: 15px 30px;
-      font-size: 1.2em;
-      font-weight: bold;
-      background: linear-gradient(45deg, #ff00cc, #3333ff, #00ffcc);
-      background-size: 300% 300%;
-      color: #fff;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      animation: glow 4s ease infinite, fadeIn 3s ease-in-out;
-      transition: transform 0.3s;
-    }
-
-    .open-button:hover {
-      transform: scale(1.05);
-    }
-
-    @keyframes glow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .magic-box {
-      margin-top: 50px;
-      display: none;
-      animation: fadeIn 2s ease-in-out forwards;
-    }
-
-    .magic-box h2 {
-      font-size: 2em;
-      margin-bottom: 30px;
-      text-shadow: 0 0 10px #fff;
-    }
-
-    .cages {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .cage {
-      background: rgba(255, 255, 255, 0.06);
-      border: 2px dashed #fff;
-      border-radius: 15px;
-      padding: 25px;
-      cursor: pointer;
-      transition: transform 0.3s, box-shadow 0.3s;
-      text-align: center;
-      font-size: 1.1em;
-      position: relative;
-    }
-
-    .cage::before {
-      content: "🕊️";
-      font-size: 2em;
-      position: absolute;
-      top: -20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .cage:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px #ff69b4;
-    }
-
-    .destination {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      z-index: 3;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      animation: fadeIn 1s ease-in;
-    }
-
-    .destination-content {
-      background: rgba(0, 0, 0, 0.322);
-      padding: 30px;
-      border-radius: 15px;
-      max-width: 80%;
-    }
-
-    .destination h3 {
-      font-size: 2em;
-      margin-bottom: 20px;
-    }
-
-    .destination p {
-      font-size: 1.2em;
-      line-height: 1.6;
-    }
-
-    .destination button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1em;
-      background: #ff69b4;
-      border: none;
-      border-radius: 5px;
-      color: #fff;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .destination button:hover {
-      background: #ff1493;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-      .agradecimiento h1 { font-size: 2em; }
-      .magic-box h2 { font-size: 1.5em; }
-      .cage { font-size: 1em; }
-      .destination-content { padding: 20px; }
-      .open-button { font-size: 1em; padding: 12px 24px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message for Tania</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #4a90e2, #ff6b9a, #4a90e2, #ff6b9a);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .message {
+            font-size: 1.2em;
+            line-height: 1.6;
+            max-width: 90%;
+            margin: 0 auto;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .heart {
+            color: #ff6b9a;
+            font-size: 1.5em;
+            animation: beat 1s infinite;
+        }
+        @keyframes beat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @media (max-width: 600px) {
+            .message {
+                font-size: 1em;
+            }
+            img {
+                max-width: 80%;
+            }
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <div class="agradecimiento">
-      <h1>A Mi Diosa Tania y Rey Alex</h1>
-      <p>Mi reina, el viaje a Denia ha sido un sueño del que no deseo despertar. Cada momento bajo sus pies, sirviéndote con devoción, ha sido un regalo divino. Su risa, su presencia, y la paz que me da al ser su chucho fiel han grabado en mi corazón memorias eternas. Miles gracias, mi diosa, por permitirme acompañarles y cuidar de usted y su amor. Ustes son mi paraíso, mi luz, y mi razón para soñar. 🥹🐶💖</p>
-      <p>Con todo mi amor y respeto, le dedico esta página, 3 cofres mágicos para planear nuestra próxima aventura. ¿A dónde nos llevará el destino, mi vida?</p>
-      <button class="open-button" onclick="document.querySelector('.magic-box').style.display='block'; this.style.display='none';">✨ Abrir Cofres ✨</button>
-    </div>
-
-    <div class="magic-box">
-      <h2>El Cofre Mágico de Nuestra Próxima Aventura</h2>
-      <div class="cages">
-        <div class="cage" onclick="showDestination('Playa de Maro y Cala del Cañuelo', '../images/cala.png', 'Solo a 5 horas de Madrid, aguas cristalinas rodeadas de acantilados verdes y tranquilidad total.')">
-          Cofre 1: Maro
+    <div class="container">
+        <img src="../images/sella.jpg" alt="Tania and Family">
+        <div class="message">
+            Mi diosa Tania preciosa, que su belleza ilumine cada rincón, junto a su hermano y su adorada familia. Que en las cristalinas aguas del río Sella en Asturias forjen momentos inolvidables, llenos de alegría y paz. Siempre estoy aquí, atento y listo para usted, mi vida, su chucho fiel e inesperado, eternamente a sus pies con devoción infinita. 💖
         </div>
-        <div class="cage" onclick="showDestination('Playa de Cabopino y Nagüeles', '../images/cabopino.png', 'Playas amplias con arena dorada en Marbella. A solo 6 horas en coche desde Madrid, ideal para un viaje con glamour.')">
-          Cofre 2: Marbella
-        </div>
-        <div class="cage" onclick="showDestination('Playa de los Muertos y Cabo de Gata', '../images/muertos.png', 'Una joya salvaje en Almería. Aguas turquesas, paisajes volcánicos y un toque de aventura.')">
-          Cofre 3: Almería
-        </div>
-      </div>
     </div>
-  </div>
-
-  <div class="destination" id="destination">
-    <div class="destination-content">
-      <h3 id="destination-name"></h3>
-      <p id="destination-text"></p>
-      <button onclick="hideDestination()">Cerrar</button>
-    </div>
-  </div>
-
-  <script>
-    function showDestination(name, image, text) {
-      const destination = document.getElementById('destination');
-      const destinationName = document.getElementById('destination-name');
-      const destinationText = document.getElementById('destination-text');
-      destination.style.backgroundImage = `url(${image})`;
-      destinationName.textContent = name;
-      destinationText.textContent = `${text} Mis reinos ¿permitirían a su chucho fiel acompañarles a una nueva aventura? 🩷🌊🐶`;
-      destination.style.display = 'flex';
-    }
-
-    function hideDestination() {
-      document.getElementById('destination').style.display = 'none';
-    }
-  </script>
 </body>
 </html>
