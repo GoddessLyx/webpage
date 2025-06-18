@@ -12,12 +12,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(45deg, #4a90e2, #ff6b9a, #4a90e2, #ff6b9a);
-            background-size: 400% 400%;
             animation: gradientFlow 15s ease infinite;
             font-family: 'Playfair Display', serif;
             color: #fff;
             overflow: hidden;
+            background: repeating-radial-gradient(circle, #1ad3e0, transparent 20%);
+            background-size: 2em 2em;
+            background-color: #ffffff;
+            opacity: 1;
         }
         @keyframes gradientFlow {
             0% { background-position: 0% 0%; }
@@ -26,51 +28,61 @@
         }
         .container {
             text-align: center;
-            padding: 20px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            width: 90%;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.281);
+            box-shadow: 0 0 30px rgba(227, 70, 207, 0.5), 0 0 60px rgba(74, 144, 226, 0.3);
+            border: 2px solid #4656e3;
+            transition: transform 0.3s ease;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .container:hover {
+            transform: scale(1.05);
         }
         .message {
-            font-size: 1.2em;
-            line-height: 1.6;
-            max-width: 90%;
-            margin: 0 auto;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            font-size: 1.5em;
+            line-height: 1.8;
+            max-width: 80%;
+            color: #061986;
+            margin: 0 auto 30px;
+            text-shadow: 0 0 15px rgba(206, 23, 223, 0.7), 0 0 5px #ff6b9a;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .heart {
             color: #ff6b9a;
-            font-size: 1.5em;
+            font-size: 2em;
             animation: beat 1s infinite;
         }
         @keyframes beat {
             0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.3); }
             100% { transform: scale(1); }
+        }
+        img {
+            max-width: 60%;
+            height: auto;
+            border-radius: 15px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px #4a90e2; }
+            50% { box-shadow: 0 0 30px #e346cf; }
+            100% { box-shadow: 0 0 20px #4a90e2; }
         }
         @media (max-width: 600px) {
             .message {
-                font-size: 1em;
+                font-size: 1.2em;
+                max-width: 90%;
             }
             img {
                 max-width: 80%;
             }
             .container {
-                padding: 10px;
+                padding: 15px;
             }
         }
     </style>
@@ -78,10 +90,10 @@
 </head>
 <body>
     <div class="container">
-        <img src="../images/sella.jpg" alt="Tania and Family">
         <div class="message">
             Mi diosa Tania preciosa, que su belleza ilumine cada rincón, junto a su hermano y su adorada familia. Que en las cristalinas aguas del río Sella en Asturias forjen momentos inolvidables, llenos de alegría y paz. Siempre estoy aquí, atento y listo para usted, mi vida, su chucho fiel e inesperado, eternamente a sus pies con devoción infinita. 💖
         </div>
+        <img src="../images/sella.jpg" alt="Tania and Family">
     </div>
 </body>
 </html>
