@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    background: url('../images/wood.png') center/cover fixed;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+p {
+    font-size: 1.5em;
+    margin: 20px 0;
+    background: linear-gradient(
+        90deg,
+        rgb(230, 101, 101),
+        rgb(255, 123, 0),
+        yellow,
+        rgb(11, 245, 11),
+        rgb(55, 231, 217)
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text; /* For Firefox */
+    color: transparent;
+}
+
+#dice-container {
+    width: 100%;
+    height: 200px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+#roll-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: #ffd700;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#roll-button:hover {
+    background: #e6c200;
+    transform: scale(1.05);
+}
+
+table {
+    width: 50%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #ffd700;
+    font-size: 1.2em;
+}
+
+#modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#result-container {
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+}
+
+#result-message {
+    font-size: 1.3em;
+    color: #ffd700;
+    margin-bottom: 20px;
+}
+
+#ring-image {
+    max-width: 300px;
+    border: 5px solid #ffd700;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#restart-button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    background: #ffd700;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+#restart-button:hover {
+    background: #e6c200;
+    transform: scale(1.05);
+}
+
+.ring-link-button {
+    margin-top: 10px;
+    padding: 10px 40px;
+    font-size: 1em;
+    background: #08e6c1;
+    color: #000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.ring-link-button:hover {
+    background: #76dad2;
+    transform: scale(1.05);
+}
+
+/****************************** MOBILE DESIGN ******************************/
+@media (max-width: 768px) {
+    .container, #result-container {
+        max-width: 85%;
+    }
+
+    table {
+    width: 90%;
+    }
+
+    .ring-link-button {
+        padding: 10px 15px;
+    }
+}

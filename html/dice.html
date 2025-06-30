@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Anillo de Mi Diosa Tania</title>
+    <link rel="stylesheet" href="../styles/dice.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <p id="welcome-message">
+            Mi Diosa Tania preciosa, he creado este juego solo para usted, con la esperanza de que perdone a su chucho travieso. 
+            </br></br> Lance los dados tres veces... y descubra qué joya será la primera en brillar: un anillo en su mano o un colgante en su cuello?
+        </p>
+        <div id="dice-container"></div>
+        <button id="roll-button" onclick="rollDice()">Tirar los Dados</button>
+        <table id="roll-table">
+            <thead>
+                <tr>
+                    <th>Tirada</th>
+                    <th>Resultado</th>
+                </tr>
+            </thead>
+            <tbody id="roll-results"></tbody>
+            <tfoot>
+                <tr>
+                    <td>Total</td>
+                    <td id="total-sum">0</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div id="modal" style="display: none;">
+            <div id="result-container">
+                <p id="result-message"></p>
+                <img id="ring-image" src="" alt="Anillo Seleccionado">
+                <button id="restart-button" onclick="restartGame()">Jugar de Nuevo</button>
+                <a href="#" class="ring-link-button" target="_blank">Ver Anillo en la Web</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="../scripts/dice.js"></script>
+</body>
+</html>
